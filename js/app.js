@@ -51,11 +51,11 @@ button.y = app.view.height / 2;
 button.interactive = true;
 
 //create first page
-let BlueRect = new PIXI.Graphics();
-BlueRect.beginFill(0x0000FF);
+let BlackRect = new PIXI.Graphics();
+BlackRect.beginFill(0x111111);
 
-BlueRect.drawRect(0, 0, app.view.width, app.view.height);
-firstPage.addChild(BlueRect);
+BlackRect.drawRect(0, 0, app.view.width, app.view.height);
+firstPage.addChild(BlackRect);
 
 let text = new PIXI.Text("Welcome!!!");
 text.anchor.set(0.5);
@@ -69,7 +69,7 @@ text.style = new PIXI.TextStyle({
 
 //lose Page
 let NewRect = new PIXI.Graphics();
-NewRect.beginFill(0x00AAAA);
+NewRect.beginFill(0x111111);
 
 NewRect.drawRect(0, 0, app.view.width, app.view.height);
 LosePage.addChild(NewRect);
@@ -80,7 +80,7 @@ text1.x = app.view.width / 2;
 text1.y = app.view.height / 3;
 text1.width = 500;
 text1.style = new PIXI.TextStyle({
-    fill: 0x111111,
+    fill: 0xAAAA,
     fontSize: 40,
     fontFamily: "Arcade"
 });
@@ -165,7 +165,6 @@ function changeDirection() {
 
     vx = -vx;
     document.querySelector("#number").innerHTML = point;
-    finalScore += 10;
     vy = -vy;
     // //right
     // if (xv >= (player.width - player.width / 3) && xv <= 150) {
