@@ -52,7 +52,7 @@ button.interactive = true;
 
 //create first page
 let BlackRect = new PIXI.Graphics();
-BlackRect.beginFill(0x111111);
+BlackRect.beginFill(0xAAAAA);
 
 BlackRect.drawRect(0, 0, app.view.width, app.view.height);
 firstPage.addChild(BlackRect);
@@ -74,17 +74,7 @@ NewRect.beginFill(0x111111);
 NewRect.drawRect(0, 0, app.view.width, app.view.height);
 LosePage.addChild(NewRect);
 
-let text1 = new PIXI.Text(`YOU LOSE!!!  HIGH SCORE: ${finalScore}`);
-text1.anchor.set(0.5);
-text1.x = app.view.width / 2;
-text1.y = app.view.height / 3;
-text1.width = 500;
-text1.style = new PIXI.TextStyle({
-    fill: 0xAAAA,
-    fontSize: 40,
-    fontFamily: "Arcade"
-});
-LosePage.addChild(text1);
+
 
 onload = function(e) {
     e.preventDefault();
@@ -113,7 +103,7 @@ app.stage.interactive = true;
 app.stage.on("pointermove", movePlayer);
 vx = Math.random() * 20 + 100 / 30;
 vy = Math.random() * 20 + 100 / 30;
-
+finalScore = point;
 
 function movePlayer(e) {
     let pos = e.data.global;
@@ -129,7 +119,7 @@ function moveBall() {
     ball.y += vy;
 
     if (hitPlayer(ball, player)) {
-        point += 10;
+
         changeDirection();
     }
     if (ball.x + ball.width / 2 > app.view.width) {
@@ -144,12 +134,21 @@ function moveBall() {
     }
 
     if (ball.y + ball.height / 2 >= app.view.height) {
-
-
+        let text1 = new PIXI.Text(`YOU LOSE!!!  HIGH SCORE: ${point}`);
+        text1.anchor.set(0.5);
+        text1.x = app.view.width / 2;
+        text1.y = app.view.height / 3;
+        text1.width = 500;
+        text1.style = new PIXI.TextStyle({
+            fill: 0xAAAA,
+            fontSize: 40,
+            fontFamily: "Arcade"
+        });
+        LosePage.addChild(text1);
         app.stage.removeChild(ball);
         app.stage.removeChild(player);
         LosePage.visible = true;
-        point = null
+        // point = null
     }
 
 }
@@ -162,10 +161,11 @@ function hitPlayer(bll, ply) {
 }
 
 function changeDirection() {
-
+    point += 10;
     vx = -vx;
-    document.querySelector("#number").innerHTML = point;
     vy = -vy;
+    document.querySelector("#number").innerHTML = point;
+
     // //right
     // if (xv >= (player.width - player.width / 3) && xv <= 150) {
     //     vx = +vx;
