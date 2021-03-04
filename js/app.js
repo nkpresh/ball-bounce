@@ -8,6 +8,7 @@ let LosePage;
 let canvas = document.querySelector("#canvas");
 let button;
 var point = 0;
+var finalScore = 0;
 
 app = new PIXI.Application({
     width: 600,
@@ -73,7 +74,7 @@ NewRect.beginFill(0x00AAAA);
 NewRect.drawRect(0, 0, app.view.width, app.view.height);
 LosePage.addChild(NewRect);
 
-let text1 = new PIXI.Text(`YOU LOSE!!!  HIGH SCORE: ${point}`);
+let text1 = new PIXI.Text("YOU LOSE!!!  HIGH SCORE: " + finalScore);
 text1.anchor.set(0.5);
 text1.x = app.view.width / 2;
 text1.y = app.view.height / 3;
@@ -164,6 +165,7 @@ function changeDirection() {
 
     vx = -vx;
     document.querySelector("#number").innerHTML = point;
+    finalScore = point;
     vy = -vy;
     // //right
     // if (xv >= (player.width - player.width / 3) && xv <= 150) {
