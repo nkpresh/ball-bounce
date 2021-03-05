@@ -184,8 +184,8 @@ function changeDirection() {
         winPage.addChild(winText);
         winPage.visible = true;
     } else {
-        // vx = -vx;
-        // vy = -vy;
+        vx = -vx;
+        vy = -vy;
 
     }
     document.querySelector("#score").innerHTML = point;
