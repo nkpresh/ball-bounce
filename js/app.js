@@ -184,26 +184,10 @@ function changeDirection() {
         winPage.addChild(winText);
         winPage.visible = true;
     } else {
-        vx = -vx;
-        vy = -vy;
+        // vx = -vx;
+        // vy = -vy;
 
     }
     document.querySelector("#score").innerHTML = point;
 
-
-
-
-
-    // //right
-    // if (xv >= (player.width - player.width / 3) && xv <= 150) {
-    //     vx = +vx;
-    // }
-    // //center
-    // if (xv > 50 && xv < 100) {
-    //     vx = Math.random() * vx + -vy;
-    // }
-    // //left
-    // if (xv <= 50 && xv > 0) {
-    //     vx = -vx
-    // }
 }
