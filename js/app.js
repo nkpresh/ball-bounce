@@ -97,10 +97,11 @@ onload = function(e) {
 
 }
 button.on("click", startGame);
+var gameLoop;
 
 function startGame() {
     firstPage.visible = false;
-    setInterval(moveBall, 1000 / 30);
+    gameLoop = setInterval(moveBall, 1000 / 30);
 
 }
 app.stage.interactive = true;
@@ -138,7 +139,7 @@ function moveBall() {
     }
 
     if (ball.y + ball.height / 2 >= app.view.height) {
-
+        clearInterval(gameLoop);
         let text1 = new PIXI.Text(`YOU LOSE!  SCORE: ${point}`);
         text1.anchor.set(0.5);
         text1.x = app.view.width / 2;
@@ -167,7 +168,7 @@ function hitPlayer(bll, ply) {
 function changeDirection() {
 
     if (point == 50) {
-        
+        clearInterval(gameLoop);
         app.stage.removeChild(player);
         app.stage.removeChild(ball);
         let winText = new PIXI.Text(`Well done !!! Score: ${point}`);
