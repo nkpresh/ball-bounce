@@ -75,20 +75,10 @@ NewRect.drawRect(0, 0, app.view.width, app.view.height);
 LosePage.addChild(NewRect);
 
 //win Page
-let GreyRect = new PIXI.Graphics();
-GreyRect.beginFill(0xAAAAAA);
-GreyRect.drawRect(0, 0, app.view.width, app.view.height);
-let winText = new PIXI.Text(`Well done !!! Score: ${point}`);
-winText.anchor.set(0.5);
-winText.x = app.view.width / 2;
-winText.y = app.view.height / 3;
-winText.width = 500;
-winText.style = new PIXI.TextStyle({
-    fill: 0x111111,
-    fontSize: 80,
-    fontFamily: "Arcade"
-});
-winPage.addChild(GreyRect);
+let winRect = new PIXI.Graphics();
+winRect.beginFill(0x111111);
+winRect.drawRect(0, 0, app.view.width, app.view.height);
+winPage.addChild(winRect);
 
 onload = function(e) {
     e.preventDefault();
@@ -133,7 +123,7 @@ function moveBall() {
     ball.y += vy;
 
     if (hitPlayer(ball, player)) {
-
+        point += 10;
         changeDirection();
     }
     if (ball.x + ball.width / 2 > app.view.width) {
@@ -175,17 +165,32 @@ function hitPlayer(bll, ply) {
 }
 
 function changeDirection() {
-    vx = -vx;
-    vy = -vy;
+
     if (point == 50) {
+        
         app.stage.removeChild(player);
         app.stage.removeChild(ball);
+        let winText = new PIXI.Text(`Well done !!! Score: ${point}`);
+        winText.anchor.set(0.5);
+        winText.x = app.view.width / 2;
+        winText.y = app.view.height / 3;
+        winText.width = 500;
+        winText.style = new PIXI.TextStyle({
+            fill: 0xAAAA,
+            fontSize: 80,
+            fontFamily: "Arcade"
+        });
+        winPage.addChild(winText);
         winPage.visible = true;
     } else {
-        point += 10;
+        vx = -vx;
+        vy = -vy;
 
         document.querySelector("#score").innerHTML = point;
     }
+
+
+
 
 
     // //right
