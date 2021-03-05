@@ -187,8 +187,8 @@ function changeDirection() {
         vx = -vx;
         vy = -vy;
 
-        document.querySelector("#score").innerHTML = point;
     }
+    document.querySelector("#score").innerHTML = point;
 
 
 
