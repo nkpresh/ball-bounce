@@ -61,6 +61,7 @@ let text = new PIXI.Text("Welcome!!!");
 text.anchor.set(0.5);
 text.x = app.view.width / 2;
 text.y = app.view.height / 3;
+text.width = 500;
 text.style = new PIXI.TextStyle({
     fill: 0x111111,
     fontSize: 80,
@@ -70,11 +71,24 @@ text.style = new PIXI.TextStyle({
 //lose Page
 let NewRect = new PIXI.Graphics();
 NewRect.beginFill(0x111111);
-
 NewRect.drawRect(0, 0, app.view.width, app.view.height);
 LosePage.addChild(NewRect);
 
-
+//win Page
+let GreyRect = new PIXI.Graphics();
+GreyRect.beginFill(0xAAAAAA);
+GreyRect.drawRect(0, 0, app.view.width, app.view.height);
+let winText = new PIXI.Text(`Well done !!! Score: ${point}`);
+winText.anchor.set(0.5);
+winText.x = app.view.width / 2;
+winText.y = app.view.height / 3;
+winText.width = 500;
+winText.style = new PIXI.TextStyle({
+    fill: 0x111111,
+    fontSize: 80,
+    fontFamily: "Arcade"
+});
+winPage.addChild(GreyRect);
 
 onload = function(e) {
     e.preventDefault();
@@ -134,21 +148,21 @@ function moveBall() {
     }
 
     if (ball.y + ball.height / 2 >= app.view.height) {
-        let text1 = new PIXI.Text(`YOU LOSE!!!  HIGH SCORE: ${point}`);
+
+        let text1 = new PIXI.Text(`YOU LOSE!  SCORE: ${point}`);
         text1.anchor.set(0.5);
         text1.x = app.view.width / 2;
         text1.y = app.view.height / 3;
         text1.width = 500;
         text1.style = new PIXI.TextStyle({
             fill: 0xAAAA,
-            fontSize: 40,
+            fontSize: 30,
             fontFamily: "Arcade"
         });
         LosePage.addChild(text1);
         app.stage.removeChild(ball);
         app.stage.removeChild(player);
         LosePage.visible = true;
-        // point = null
     }
 
 }
@@ -161,10 +175,18 @@ function hitPlayer(bll, ply) {
 }
 
 function changeDirection() {
-    point += 10;
     vx = -vx;
     vy = -vy;
-    document.querySelector("#number").innerHTML = point;
+    if (point == 50) {
+        app.stage.removeChild(player);
+        app.stage.removeChild(ball);
+        winPage.visible = true;
+    } else {
+        point += 10;
+
+        document.querySelector("#score").innerHTML = point;
+    }
+
 
     // //right
     // if (xv >= (player.width - player.width / 3) && xv <= 150) {
