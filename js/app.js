@@ -26,14 +26,6 @@ firstPage = new PIXI.Container();
 LosePage = new PIXI.Container();
 winPage = new PIXI.Container();
 
-//create ball
-ball = new PIXI.Sprite.from("img/ball.png");
-ball.width = 30;
-ball.height = 30;
-ball.x = app.view.width / 2;
-ball.y = app.view.height / 2;
-ball.anchor.set(0.5);
-
 //create player
 player = new PIXI.Sprite.from("img/player.png");
 player.width = 150;
@@ -41,6 +33,14 @@ player.height = 20;
 player.anchor.set(0.5);
 player.x = app.view.width / 2;
 player.y = app.view.height - 10;
+
+//create ball
+ball = new PIXI.Sprite.from("img/ball.png");
+ball.width = 30;
+ball.height = 30;
+ball.x = app.view.width / 2;
+ball.y = ball.y = player.y - (player.height / 2);
+ball.anchor.set(0.5);
 
 //button
 button = new PIXI.Sprite.from("img/playButton.png");
@@ -106,16 +106,12 @@ function startGame() {
 }
 app.stage.interactive = true;
 app.stage.on("pointermove", movePlayer);
-vx = Math.random() * 20 + 100 / 30;
-vy = Math.random() * 20 + 100 / 30;
+// vx = Math.random() * 20 + 100 / 30;
+// vy = Math.random() * 20 + 100 / 30;
 
 function movePlayer(e) {
     let pos = e.data.global;
-    if (player.x - (pos.width / 2) < 0) {
-
-    } else {
-        player.x = pos.x;
-    }
+    player.x = pos.x;
 }
 
 function moveBall() {
@@ -153,8 +149,8 @@ function moveBall() {
             app.stage.removeChild(player);
             LosePage.visible = true;
         } else {
-            ball.x = 0;
-            ball.y = 0;
+            ball.x = vx;
+            ball.y = -vx;
         }
 
     }
@@ -169,7 +165,7 @@ function hitPlayer(bll, ply) {
 }
 
 function changeDirection() {
-    if (point == 50) {
+    if (point == 100) {
         clearInterval(gameLoop);
         app.stage.removeChild(player);
         app.stage.removeChild(ball);
@@ -188,8 +184,8 @@ function changeDirection() {
     } else {
         let CollidPoint = ball.x - player.x;
         let angle = CollidPoint * (Math.PI / 3);
-        vx = Math.sin(angle) * speed;
-        vy = Math.cos(angle) * -speed;
+        vx = speed * Math.sin(angle);
+        vy = -speed * Math.cos(angle);
 
     }
     document.querySelector("#score").innerHTML = point;
