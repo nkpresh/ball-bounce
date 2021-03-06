@@ -165,7 +165,7 @@ function hitPlayer(bll, ply) {
     return bll.x + bll.width > ply.x - (player.width / 2) &&
         ply.x + (ply.width / 2) > ball.x &&
         bll.y + bll.height > ply.y &&
-        ply.y + ply.height > ball.y;
+        ply.y + (ply.height / 2) > ball.y;
 }
 
 function changeDirection() {
@@ -187,8 +187,9 @@ function changeDirection() {
         winPage.addChild(winText);
         winPage.visible = true;
     } else {
-        vx = -vx;
-        vy = -vy;
+        if () {
+
+        }
 
     }
     document.querySelector("#score").innerHTML = point;
