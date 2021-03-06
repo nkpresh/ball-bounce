@@ -163,7 +163,7 @@ function moveBall() {
 
 function hitPlayer(bll, ply) {
     return bll.x + bll.width > ply.x - (player.width / 2) &&
-        ply.x + (ply.width / 2 > ball.x) &&
+        ply.x + (ply.width / 2) > ball.x &&
         bll.y + bll.height > ply.y &&
         ply.y + ply.height > ball.y;
 }
