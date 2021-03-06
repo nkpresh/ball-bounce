@@ -25,7 +25,13 @@ firstPage = new PIXI.Container();
 LosePage = new PIXI.Container();
 winPage = new PIXI.Container();
 
-
+//create ball
+ball = new PIXI.Sprite.from("img/ball.png");
+ball.width = 30;
+ball.height = 30;
+ball.x = app.view.width / 2;
+ball.y = app.view.height / 2;
+ball.anchor.set(0.5);
 
 //create player
 player = new PIXI.Sprite.from("img/player.png");
@@ -34,14 +40,6 @@ player.height = 20;
 player.anchor.set(0.5);
 player.x = app.view.width / 2;
 player.y = app.view.height - 10;
-
-//create ball
-ball = new PIXI.Sprite.from("img/ball.png");
-ball.width = 30;
-ball.height = 30;
-ball.x = app.view.width / 2;
-ball.y = app.view.height / 2;
-ball.anchor.set(0.5);
 
 //button
 button = new PIXI.Sprite.from("img/playButton.png");
@@ -166,8 +164,8 @@ function moveBall() {
 function hitPlayer(bll, ply) {
     return bll.x + bll.width > ply.x - (player.width / 2) &&
         ply.x + (ply.width / 2 > ball.x) &&
-        bll.y + bll.height >= ply.y &&
-        ply.y + ply.height >= ball.y;
+        bll.y + bll.height > ply.y &&
+        ply.y + ply.height > ball.y;
 }
 
 function changeDirection() {
