@@ -108,7 +108,6 @@ app.stage.interactive = true;
 app.stage.on("pointermove", movePlayer);
 vx = Math.random() * 20 + 100 / 30;
 vy = Math.random() * 20 + 100 / 30;
-finalScore = point;
 
 function movePlayer(e) {
     let pos = e.data.global;
