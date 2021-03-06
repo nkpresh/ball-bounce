@@ -4,6 +4,7 @@ let player;
 var vx, vy;
 let firstPage;
 let winPage;
+let speed = 30;
 let LosePage;
 let canvas = document.querySelector("#canvas");
 let button;
@@ -100,7 +101,7 @@ var gameLoop;
 
 function startGame() {
     firstPage.visible = false;
-    gameLoop = setInterval(moveBall, 1000 / 30);
+    gameLoop = setInterval(moveBall, 1000 / speed);
 
 }
 app.stage.interactive = true;
@@ -162,14 +163,14 @@ function moveBall() {
 }
 
 function hitPlayer(bll, ply) {
-    return bll.x + bll.width > ply.x - (player.width / 2) &&
-        ply.x + (ply.width / 2) > ball.x &&
-        bll.y + bll.height > ply.y &&
-        ply.y + (ply.height / 2) > ball.y;
+    return bll.x + bll.width > ply.x - (ply.width / 2) &&
+        ply.x + (ply.width) > ball.x &&
+        bll.y + (bll.height) > ply.y &&
+        ply.y + ply.height > ball.y;
 }
 
 function changeDirection() {
-
+    let angle;
     if (point == 50) {
         clearInterval(gameLoop);
         app.stage.removeChild(player);
@@ -187,9 +188,11 @@ function changeDirection() {
         winPage.addChild(winText);
         winPage.visible = true;
     } else {
-        if () {
-
-        }
+        let CollidPoint = ball.x - (player.x + player.width / 2);
+        // vx = -vx;
+        // vy = -vy;
+        vx = Math.sin(angle) * speed;
+        vy = Math.cos(angle) * speed;
 
     }
     document.querySelector("#score").innerHTML = point;
