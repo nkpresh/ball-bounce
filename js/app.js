@@ -9,6 +9,7 @@ let canvas = document.querySelector("#canvas");
 let button;
 var point = 0;
 var finalScore = 0;
+var life = 3;
 
 app = new PIXI.Application({
     width: 600,
@@ -127,10 +128,7 @@ function moveBall() {
         point += 10;
         changeDirection();
     }
-    if (ball.x + ball.width / 2 > app.view.width) {
-        vx = -vx;
-    }
-    if (ball.x - ball.width <= 0) {
+    if (ball.x + ball.width / 2 > app.view.width || ball.x - ball.width <= 0) {
         vx = -vx;
     }
 
@@ -139,21 +137,28 @@ function moveBall() {
     }
 
     if (ball.y + ball.height / 2 >= app.view.height) {
-        clearInterval(gameLoop);
-        let text1 = new PIXI.Text(`YOU LOSE!  SCORE: ${point}`);
-        text1.anchor.set(0.5);
-        text1.x = app.view.width / 2;
-        text1.y = app.view.height / 3;
-        text1.width = 500;
-        text1.style = new PIXI.TextStyle({
-            fill: 0xAAAA,
-            fontSize: 30,
-            fontFamily: "Arcade"
-        });
-        LosePage.addChild(text1);
-        app.stage.removeChild(ball);
-        app.stage.removeChild(player);
-        LosePage.visible = true;
+        life--;
+        if (life == 0) {
+            clearInterval(gameLoop);
+            let text1 = new PIXI.Text(`YOU LOSE!  SCORE: ${point}`);
+            text1.anchor.set(0.5);
+            text1.x = app.view.width / 2;
+            text1.y = app.view.height / 3;
+            text1.width = 500;
+            text1.style = new PIXI.TextStyle({
+                fill: 0xAAAA,
+                fontSize: 30,
+                fontFamily: "Arcade"
+            });
+            LosePage.addChild(text1);
+            app.stage.removeChild(ball);
+            app.stage.removeChild(player);
+            LosePage.visible = true;
+        } else {
+            ball.x = 0;
+            ball.y = 0;
+        }
+
     }
 
 }
