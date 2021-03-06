@@ -170,7 +170,6 @@ function hitPlayer(bll, ply) {
 }
 
 function changeDirection() {
-    let angle;
     if (point == 50) {
         clearInterval(gameLoop);
         app.stage.removeChild(player);
@@ -188,11 +187,10 @@ function changeDirection() {
         winPage.addChild(winText);
         winPage.visible = true;
     } else {
-        let CollidPoint = ball.x - (player.x + player.width / 2);
-        // vx = -vx;
-        // vy = -vy;
+        let CollidPoint = ball.x - player.x;
+        let angle = CollidPoint * (Math.PI / 3);
         vx = Math.sin(angle) * speed;
-        vy = Math.cos(angle) * speed;
+        vy = Math.cos(angle) * -speed;
 
     }
     document.querySelector("#score").innerHTML = point;
