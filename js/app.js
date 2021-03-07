@@ -39,7 +39,7 @@ ball = new PIXI.Sprite.from("img/ball.png");
 ball.width = 30;
 ball.height = 30;
 ball.x = app.view.width / 2;
-ball.y = ball.y = player.y - (player.height / 2);
+ball.y = ball.y = app.view.height / 2;
 ball.anchor.set(0.5);
 
 //button
@@ -149,8 +149,8 @@ function moveBall() {
             app.stage.removeChild(player);
             LosePage.visible = true;
         } else {
-            ball.x = vx;
-            ball.y = -vx;
+            // ball.x = vx;
+            // ball.y = -vx;
         }
 
     }
@@ -188,6 +188,6 @@ function changeDirection() {
         vy = -speed * Math.cos(angle);
 
     }
-    document.querySelector("#score").innerHTML = point;
+    document.querySelector("#life").innerHTML = point;
 
 }
