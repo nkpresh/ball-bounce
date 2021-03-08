@@ -23,15 +23,15 @@ app.view.x = window.width / 2;
 app.view.y = window.height / 2;
 
 //replay button
-replay = new PIXI.Texture.from("img/continueButton.jfif");
+replay = new PIXI.Texture.from("img/arrowRight.jpg");
 var replayButton = new PIXI.Sprite(replay);
-button.height = 30;
-button.width = 100;
-button.x = app.view.width - 200;
-button.x = app.view.height - 200;
+replayButton.height = 30;
+replayButton.width = 100;
+replayButton.x = app.view.width - 200;
+replayButton.x = app.view.height - 200;
 
-button.buttonMode = true;
-button.interactive = true;
+replayButton.buttonMode = true;
+replayButton.interactive = true;
 
 //continue game button
 
@@ -109,7 +109,7 @@ onload = function(e) {
 
     firstPage.addChild(text);
     firstPage.addChild(button);
-
+    LosePage.addChild(replayButton);
 }
 button.on("click", startGame);
 
