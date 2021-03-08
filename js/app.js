@@ -4,7 +4,7 @@ let player;
 var vx, vy;
 let firstPage;
 let winPage;
-let speed = 10;
+let speed = 30;
 let LosePage;
 let canvas = document.querySelector("#canvas");
 let button;
@@ -21,7 +21,7 @@ app = new PIXI.Application({
 app.view.x = window.width / 2;
 app.view.y = window.height / 2;
 
-//replay button
+//replay button winner
 replay = new PIXI.Texture.from("img/replayBtn.png");
 var replayButton = new PIXI.Sprite(replay);
 replayButton.height = 100;
@@ -35,6 +35,22 @@ replayButton.interactive = true;
 
 //replay functionality
 replayButton.on("click", startGame)
+
+//replay button for lose
+var loseReplay = new PIXI.Sprite(replay);
+loseReplay.height = 100;
+loseReplay.width = 100;
+loseReplay.anchor.set(0.5);
+loseReplay.x = app.view.width / 2;
+loseReplay.y = 300;
+
+loseReplay.buttonMode = true;
+loseReplay.interactive = true;
+
+
+
+//lose replay functionality
+loseReplay.on("click", startGame)
 
 
 //initialize pages
@@ -109,7 +125,8 @@ onload = function(e) {
 
     firstPage.addChild(text);
     firstPage.addChild(button);
-    LosePage.addChild(replayButton);
+    LosePage.addChild(loseReplay);
+
 }
 button.on("click", startGame);
 
@@ -128,8 +145,8 @@ function startGame() {
 }
 app.stage.interactive = true;
 app.stage.on("pointermove", movePlayer);
-vx = -3;
-vy = -3;
+vx = Math.floor(Math.random() * 10 + 100 / speed);
+vy = Math.floor(Math.random() * 10 + 100 / speed);
 
 function movePlayer(e) {
     let pos = e.data.global;
@@ -178,8 +195,8 @@ function moveBall() {
 function hitPlayer(bll, ply) {
     return bll.x + (bll.width / 2) > ply.x - (player.width / 2) &&
         ply.x + (ply.width / 2) > ball.x &&
-        bll.y + (bll.height / 2) >= ply.y &&
-        ply.y + (ply.height / 2) >= ball.y;
+        bll.y + bll.height >= ply.y &&
+        ball.y < ply.y + (ply.height / 2);
 }
 
 function changeDirection() {
@@ -188,7 +205,7 @@ function changeDirection() {
         clearInterval(gameLoop);
         app.stage.removeChild(player);
         app.stage.removeChild(ball);
-        let winText = new PIXI.Text(`Well done !!! Score: ${point}`);
+        let winText = new PIXI.Text(`You Win ! ! ! Score :  ${point}`);
         winText.anchor.set(0.5);
         winText.x = app.view.width / 2;
         winText.y = app.view.height / 3;
@@ -199,6 +216,8 @@ function changeDirection() {
             fontFamily: "Arcade"
         });
         winPage.addChild(winText);
+        winPage.addChild(replayButton);
+
         winPage.visible = true;
     } else {
         let CollidPoint = ball.x - player.x;
