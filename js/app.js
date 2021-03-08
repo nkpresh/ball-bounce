@@ -4,7 +4,7 @@ let player;
 var vx, vy;
 let firstPage;
 let winPage;
-let speed = 30;
+let speed = 10;
 let LosePage;
 let canvas = document.querySelector("#canvas");
 let button;
@@ -128,8 +128,8 @@ function startGame() {
 }
 app.stage.interactive = true;
 app.stage.on("pointermove", movePlayer);
-vx = -Math.floor(Math.random() * 20 - 60 / 20);
-vy = -Math.floor(Math.random() * 20 + 60 / 20);
+vx = -3;
+vy = -3;
 
 function movePlayer(e) {
     let pos = e.data.global;
@@ -137,8 +137,8 @@ function movePlayer(e) {
 }
 
 function moveBall() {
-    ball.x -= vx;
-    ball.y -= vy;
+    ball.x += vx;
+    ball.y += vy;
 
     if (hitPlayer(ball, player)) {
         changeDirection();
@@ -178,8 +178,8 @@ function moveBall() {
 function hitPlayer(bll, ply) {
     return bll.x + (bll.width / 2) > ply.x - (player.width / 2) &&
         ply.x + (ply.width / 2) > ball.x &&
-        bll.y + (bll.height) > ply.y &&
-        ply.y + (ply.height / 2) > ball.y;
+        bll.y + (bll.height / 2) >= ply.y &&
+        ply.y + (ply.height / 2) >= ball.y;
 }
 
 function changeDirection() {
