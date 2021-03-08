@@ -15,7 +15,7 @@ let canvas = document.querySelector("#canvas");
 app = new PIXI.Application({
     height: 600,
     width: 600,
-    backgroundColor: 000000
+    backgroundColor: 0xAAAAAA
 });
 
 onload = function() {
