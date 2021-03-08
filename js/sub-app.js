@@ -181,7 +181,7 @@ function changeDirection() {
         let CollidPoint = ball.x - player.x;
         let angle = CollidPoint * (Math.PI / 3);
         vx = speed * Math.sin(angle);
-        vy = speed * Math.cos(angle);
+        vy = -speed * Math.cos(angle);
     }
     document.querySelector("#life").innerHTML = life;
 
