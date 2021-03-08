@@ -11,7 +11,6 @@ let button;
 var point = 0;
 var life = 3;
 let replay;
-let continueGame;
 
 app = new PIXI.Application({
     width: 600,
@@ -116,7 +115,7 @@ button.on("click", startGame);
 
 function startGame() {
     ball.x = app.view.width / 2;
-    ball.y = ball.y = app.view.height / 2;
+    ball.y = app.view.height / 2;
     app.stage.addChild(player);
     app.stage.addChild(ball);
     LosePage.visible = false;
@@ -129,8 +128,8 @@ function startGame() {
 }
 app.stage.interactive = true;
 app.stage.on("pointermove", movePlayer);
-vx = Math.floor(Math.random() * 20 - 60 / 20);
-vy = Math.floor(Math.random() * 20 - 60 / 20);
+vx = -Math.floor(Math.random() * 20 - 60 / 20);
+vy = -Math.floor(Math.random() * 20 + 60 / 20);
 
 function movePlayer(e) {
     let pos = e.data.global;
@@ -138,8 +137,8 @@ function movePlayer(e) {
 }
 
 function moveBall() {
-    ball.x += vx;
-    ball.y += vy;
+    ball.x -= vx;
+    ball.y -= vy;
 
     if (hitPlayer(ball, player)) {
         changeDirection();
