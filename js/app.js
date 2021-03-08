@@ -35,9 +35,7 @@ replayButton.buttonMode = true;
 replayButton.interactive = true;
 
 //replay functionality
-replayButton.on("click", function() {
-
-})
+replayButton.on("click", startGame)
 
 
 //initialize pages
@@ -51,14 +49,13 @@ player.width = 150;
 player.height = 20;
 player.anchor.set(0.5);
 player.x = app.view.width / 2;
-player.y = app.view.height - 15;
+player.y = app.view.height - 10;
 
 //create ball
 ball = new PIXI.Sprite.from("img/ball.png");
 ball.width = 30;
 ball.height = 30;
-ball.x = app.view.width / 2;
-ball.y = ball.y = app.view.height / 2;
+
 ball.anchor.set(0.5);
 
 //button
@@ -100,10 +97,10 @@ winRect.drawRect(0, 0, app.view.width, app.view.height);
 winPage.addChild(winRect);
 
 onload = function(e) {
+
     e.preventDefault();
     canvas.appendChild(app.view);
-    app.stage.addChild(player);
-    app.stage.addChild(ball);
+
     app.stage.addChild(firstPage);
     app.stage.addChild(LosePage);
     app.stage.addChild(winPage);
@@ -118,6 +115,13 @@ onload = function(e) {
 button.on("click", startGame);
 
 function startGame() {
+    ball.x = app.view.width / 2;
+    ball.y = ball.y = app.view.height / 2;
+    app.stage.addChild(player);
+    app.stage.addChild(ball);
+    LosePage.visible = false;
+    winPage.visible = false;
+
     firstPage.visible = false;
     document.querySelector("#life").innerHTML = life;
     gameLoop = setInterval(moveBall, 1000 / speed);
@@ -140,11 +144,11 @@ function moveBall() {
     if (hitPlayer(ball, player)) {
         changeDirection();
     }
-    if (ball.x + (ball.width / 2) > app.view.width || ball.x - ball.width <= 0) {
+    if (ball.x + (ball.width / 2) > app.view.width || ball.x - (ball.width / 2) < 0) {
         vx = -vx;
     }
 
-    if (ball.y - ball.height < 0) {
+    if (ball.y - (ball.height / 2) < 0) {
         vy = -vy;
     }
 
