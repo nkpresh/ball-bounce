@@ -10,6 +10,8 @@ let canvas = document.querySelector("#canvas");
 let button;
 var point = 0;
 var life = 3;
+let replay;
+let continueGame;
 
 app = new PIXI.Application({
     width: 600,
