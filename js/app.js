@@ -9,8 +9,7 @@ let LosePage;
 let canvas = document.querySelector("#canvas");
 let button;
 var point = 0;
-var finalScore = 0;
-var life = 0;
+var life = 3;
 
 app = new PIXI.Application({
     width: 600,
@@ -32,7 +31,7 @@ player.width = 150;
 player.height = 20;
 player.anchor.set(0.5);
 player.x = app.view.width / 2;
-player.y = app.view.height - 10;
+player.y = app.view.height - 15;
 
 //create ball
 ball = new PIXI.Sprite.from("img/ball.png");
@@ -97,17 +96,17 @@ onload = function(e) {
 
 }
 button.on("click", startGame);
-var gameLoop;
 
 function startGame() {
     firstPage.visible = false;
+    document.querySelector("#life").innerHTML = life;
     gameLoop = setInterval(moveBall, 1000 / speed);
 
 }
 app.stage.interactive = true;
 app.stage.on("pointermove", movePlayer);
-vx = Math.random() * 20 + 100 / 30;
-vy = Math.random() * 20 + 100 / 30;
+vx = Math.floor(Math.random() * 20 - 60 / 20);
+vy = -3;
 
 function movePlayer(e) {
     let pos = e.data.global;
@@ -119,10 +118,9 @@ function moveBall() {
     ball.y += vy;
 
     if (hitPlayer(ball, player)) {
-        point += 10;
         changeDirection();
     }
-    if (ball.x + ball.width / 2 > app.view.width || ball.x - ball.width <= 0) {
+    if (ball.x + (ball.width / 2) > app.view.width || ball.x - ball.width <= 0) {
         vx = -vx;
     }
 
@@ -130,7 +128,7 @@ function moveBall() {
         vy = -vy;
     }
 
-    if (ball.y + ball.height / 2 >= app.view.height) {
+    if (ball.y + (ball.height / 2) > app.view.height) {
         life--;
         if (life == 0) {
             clearInterval(gameLoop);
@@ -155,13 +153,14 @@ function moveBall() {
 }
 
 function hitPlayer(bll, ply) {
-    return bll.x + bll.width > ply.x - (ply.width / 2) &&
-        ply.x + (ply.width) > ball.x &&
+    return bll.x + (bll.width / 2) >= ply.x - (player.width / 2) &&
+        ply.x + (ply.width / 2) > ball.x &&
         bll.y + (bll.height) > ply.y &&
-        ply.y + ply.height > ball.y;
+        ply.y + (ply.height / 2) > ball.y;
 }
 
 function changeDirection() {
+    point += 10;
     if (point == 100) {
         clearInterval(gameLoop);
         app.stage.removeChild(player);
@@ -182,9 +181,8 @@ function changeDirection() {
         let CollidPoint = ball.x - player.x;
         let angle = CollidPoint * (Math.PI / 3);
         vx = speed * Math.sin(angle);
-        vy = -speed * Math.cos(angle);
-
+        vy = speed * Math.cos(angle);
     }
-    document.querySelector("#life").innerHTML = point;
+    document.querySelector("#life").innerHTML = life;
 
 }
