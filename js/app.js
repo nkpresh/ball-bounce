@@ -36,7 +36,7 @@ replayButton.interactive = true;
 
 //replay functionality
 replayButton.on("click", function() {
-    app.create();
+
 })
 
 
