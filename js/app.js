@@ -22,6 +22,13 @@ app = new PIXI.Application({
 app.view.x = window.width / 2;
 app.view.y = window.height / 2;
 
+//replay button
+replay = new PIXI.Texture.fromImage("")
+
+
+//continue game button
+
+
 //initialize pages
 firstPage = new PIXI.Container();
 LosePage = new PIXI.Container();
