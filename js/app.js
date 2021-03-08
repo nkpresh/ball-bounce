@@ -18,8 +18,6 @@ app = new PIXI.Application({
     backgroundColor: 0xAAAAAA,
 
 });
-app.view.x = window.width / 2;
-app.view.y = window.height / 2;
 
 //replay button winner
 replay = new PIXI.Texture.from("img/replayBtn.png");
