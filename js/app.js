@@ -23,8 +23,15 @@ app.view.x = window.width / 2;
 app.view.y = window.height / 2;
 
 //replay button
-replay = new PIXI.Texture.fromImage("continueButton.jfif")
+replay = new PIXI.Texture.from("img/continueButton.jfif");
+var replayButton = new PIXI.Sprite(replay);
+button.height = 30;
+button.width = 100;
+button.x = app.view.width - 200;
+button.x = app.view.height - 200;
 
+button.buttonMode = true;
+button.interactive = true;
 
 //continue game button
 
