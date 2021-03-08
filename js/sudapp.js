@@ -1,6 +1,7 @@
 let app;
 let player;
 let ball;
+let canvas = document.querySelector("#canvas");
 
 //the app and stage
 //the player and ball
@@ -16,3 +17,10 @@ app = new PIXI.Application({
     width: window.width / 2,
     backgroundColor: 000000
 });
+
+onload = function() {
+    canvas.style.height = window.height / 2;
+    canvas.style.width = window.width / 2;
+    canvas.appendChild(app.view);
+
+}
