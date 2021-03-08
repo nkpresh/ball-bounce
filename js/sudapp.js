@@ -15,10 +15,10 @@ let canvas = document.querySelector("#canvas");
 app = new PIXI.Application({
     height: 600,
     width: 600,
-    backgroundColor: 0xAAAAAA
+    backgroundColor: 0xAAAAAA,
 });
 
 onload = function() {
-
     canvas.appendChild(app.view);
+
 }
