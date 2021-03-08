@@ -10,7 +10,7 @@ let canvas = document.querySelector("#canvas");
 let button;
 var point = 0;
 var finalScore = 0;
-var life = 3;
+var life = 0;
 
 app = new PIXI.Application({
     width: 600,
@@ -106,8 +106,8 @@ function startGame() {
 }
 app.stage.interactive = true;
 app.stage.on("pointermove", movePlayer);
-// vx = Math.random() * 20 + 100 / 30;
-// vy = Math.random() * 20 + 100 / 30;
+vx = Math.random() * 20 + 100 / 30;
+vy = Math.random() * 20 + 100 / 30;
 
 function movePlayer(e) {
     let pos = e.data.global;
@@ -148,9 +148,6 @@ function moveBall() {
             app.stage.removeChild(ball);
             app.stage.removeChild(player);
             LosePage.visible = true;
-        } else {
-            // ball.x = vx;
-            // ball.y = -vx;
         }
 
     }
