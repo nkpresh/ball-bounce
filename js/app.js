@@ -106,7 +106,7 @@ function startGame() {
 app.stage.interactive = true;
 app.stage.on("pointermove", movePlayer);
 vx = Math.floor(Math.random() * 20 - 60 / 20);
-vy = -3;
+vy = Math.floor(Math.random() * 20 - 60 / 20);
 
 function movePlayer(e) {
     let pos = e.data.global;
