@@ -28,23 +28,17 @@ var replayButton = new PIXI.Sprite(replay);
 replayButton.height = 100;
 replayButton.width = 100;
 replayButton.anchor.set(0.5);
-replayButton.x = 450;
+replayButton.x = app.view.width / 2;
 replayButton.y = 300;
 
 replayButton.buttonMode = true;
 replayButton.interactive = true;
 
-//continue game button
-continueGame = new PIXI.Texture.from("img/arrowRight.png");
-var continueButton = new PIXI.Sprite(replay);
-continueButton.height = 100;
-continueButton.width = 100;
-continueButton.anchor.set(0.5);
-continueButton.x = 50;
-continueButton.y = 300;
+//replay functionality
+replayButton.on("click", function() {
+    app.create();
+})
 
-continueButton.buttonMode = true;
-continueButton.interactive = true;
 
 //initialize pages
 firstPage = new PIXI.Container();
@@ -68,9 +62,9 @@ ball.y = ball.y = app.view.height / 2;
 ball.anchor.set(0.5);
 
 //button
-button = new PIXI.Sprite.from("img/playButton.png");
-button.height = 40;
-button.width = 140;
+button = new PIXI.Sprite.from("img/play.png");
+button.height = 100;
+button.width = 100;
 button.x = app.view.width / 3;
 button.y = app.view.height / 2;
 button.interactive = true;
@@ -120,7 +114,6 @@ onload = function(e) {
     firstPage.addChild(text);
     firstPage.addChild(button);
     LosePage.addChild(replayButton);
-    LosePage.addChild(continueButton);
 }
 button.on("click", startGame);
 
