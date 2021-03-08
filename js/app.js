@@ -177,7 +177,7 @@ function moveBall() {
 }
 
 function hitPlayer(bll, ply) {
-    return bll.x + (bll.width / 2) >= ply.x - (player.width / 2) &&
+    return bll.x + (bll.width / 2) > ply.x - (player.width / 2) &&
         ply.x + (ply.width / 2) > ball.x &&
         bll.y + (bll.height) > ply.y &&
         ply.y + (ply.height / 2) > ball.y;
@@ -206,6 +206,7 @@ function changeDirection() {
         let angle = CollidPoint * (Math.PI / 3);
         vx = speed * Math.sin(angle);
         vy = -speed * Math.cos(angle);
+        document.querySelector("#speedAndDirection").innerHTML = vy;
     }
     document.querySelector("#life").innerHTML = life;
 
