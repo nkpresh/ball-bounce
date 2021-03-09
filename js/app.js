@@ -19,6 +19,23 @@ app = new PIXI.Application({
 
 });
 
+app.stage.interactive = true;
+app.stage.on("pointermove", movePlayer);
+
+//create ball
+ball = new PIXI.Sprite.from("img/ball.png");
+ball.width = 30;
+ball.height = 30;
+ball.anchor.set(0.5);
+
+//create player
+player = new PIXI.Sprite.from("img/player.png");
+player.width = 147;
+player.height = 21;
+player.anchor.set(0.5);
+player.x = app.view.width / 2;
+player.y = app.view.height - 10;
+
 //replay button winner
 replay = new PIXI.Texture.from("img/replayBtn.png");
 var replayButton = new PIXI.Sprite(replay);
@@ -41,11 +58,8 @@ loseReplay.width = 100;
 loseReplay.anchor.set(0.5);
 loseReplay.x = app.view.width / 2;
 loseReplay.y = 300;
-
 loseReplay.buttonMode = true;
 loseReplay.interactive = true;
-
-
 
 //lose replay functionality
 loseReplay.on("click", startGame)
@@ -56,21 +70,6 @@ firstPage = new PIXI.Container();
 LosePage = new PIXI.Container();
 winPage = new PIXI.Container();
 
-//create player
-player = new PIXI.Sprite.from("img/player.png");
-player.width = 150;
-player.height = 20;
-player.anchor.set(0.5);
-player.x = app.view.width / 2;
-player.y = app.view.height - 10;
-
-//create ball
-ball = new PIXI.Sprite.from("img/ball.png");
-ball.width = 30;
-ball.height = 30;
-
-ball.anchor.set(0.5);
-
 //button
 button = new PIXI.Sprite.from("img/play.png");
 button.height = 100;
@@ -78,14 +77,13 @@ button.width = 100;
 button.x = app.view.width / 3;
 button.y = app.view.height / 2;
 button.interactive = true;
+button.buttonMode = true;
 
 //create first page
 let BlackRect = new PIXI.Graphics();
 BlackRect.beginFill(0xAAAAA);
-
 BlackRect.drawRect(0, 0, app.view.width, app.view.height);
 firstPage.addChild(BlackRect);
-
 let text = new PIXI.Text("Welcome!!!");
 text.anchor.set(0.5);
 text.x = app.view.width / 2;
@@ -126,10 +124,11 @@ onload = function(e) {
     LosePage.addChild(loseReplay);
 
 }
+
 button.on("click", startGame);
 
 vx = Math.floor(Math.random() * 10 + 100 / speed);
-vy = Math.floor(Math.random() * 10 + 100 / speed);
+vy = Math.floor(Math.random() * -10 + 100 / speed);
 
 function startGame() {
     ball.x = app.view.width / 2;
@@ -144,9 +143,6 @@ function startGame() {
     gameLoop = setInterval(moveBall, 1000 / speed);
 
 }
-app.stage.interactive = true;
-app.stage.on("pointermove", movePlayer);
-
 
 function movePlayer(e) {
     let pos = e.data.global;
