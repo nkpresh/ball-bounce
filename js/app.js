@@ -28,7 +28,7 @@ ball = new PIXI.Sprite.from("img/ball.png");
 ball.width = 30;
 ball.height = 30;
 ball.x = app.view.width / 2;
-ball.y = 0;
+ball.y = app.view.width / 2;
 ball.anchor.set(0.5);
 ballRadius = ball.width / 2;
 
@@ -189,7 +189,9 @@ function moveBall() {
 }
 
 function hitPlayer(bll, ply) {
-    return
+    return ball.x - ballRadius >= (player.x - player.width / 2) &&
+        player.x + (player.width / 2) >= ball.x - ballRadius &&
+        ball.x + ball.width > player.x && player.x -
 }
 
 function changeDirection() {
