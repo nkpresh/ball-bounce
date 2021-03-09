@@ -27,8 +27,6 @@ app.stage.on("pointermove", movePlayer);
 ball = new PIXI.Sprite.from("img/ball.png");
 ball.width = 30;
 ball.height = 30;
-ball.x = app.view.width / 2;
-ball.y = app.view.width / 2;
 ball.anchor.set(0.5);
 ballRadius = ball.width / 2;
 
@@ -134,6 +132,8 @@ vx = Math.floor(Math.random() * 10 + 100 / speed);
 vy = Math.floor((-1 * Math.random() * 10 + 100) / speed);
 
 function startGame() {
+    ball.x = app.view.width / 2;
+    ball.y = app.view.width / 2;
     app.stage.addChild(player);
     app.stage.addChild(ball);
     LosePage.visible = false;
@@ -189,9 +189,11 @@ function moveBall() {
 }
 
 function hitPlayer(bll, ply) {
-    return ball.x - ballRadius >= (player.x - player.width / 2) &&
-        player.x + (player.width / 2) >= ball.x - ballRadius &&
-        ball.y + (ball.height / 2) > player.x && player.y + (player.height / 2) > ball.y
+    return bll.x + bll.width / 2 > ply.x - (player.width / 2) &&
+        ply.x + (ply.width / 2) > ball.x &&
+        bll.y + bll.height > ply.y && ply.y + (ply.height / 2) > ball.x
+
+
 }
 
 function changeDirection() {
