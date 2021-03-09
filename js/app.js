@@ -11,6 +11,7 @@ let button;
 var point = 0;
 var life = 3;
 let replay;
+let ballRadius;
 
 app = new PIXI.Application({
     width: 600,
@@ -27,6 +28,7 @@ ball = new PIXI.Sprite.from("img/ball.png");
 ball.width = 30;
 ball.height = 30;
 ball.anchor.set(0.5);
+ballRadius = ball.width / 2;
 
 //create player
 player = new PIXI.Sprite.from("img/player.png");
@@ -127,7 +129,7 @@ onload = function(e) {
 }
 
 vx = Math.floor(Math.random() * 10 + 100 / speed);
-vy = Math.floor(-1 * Math.random() * 10 + 100 / speed);
+vy = Math.floor((-1 * Math.random() * 10 + 100) / speed);
 
 function startGame() {
     ball.x = app.view.width / 2;
@@ -188,10 +190,7 @@ function moveBall() {
 }
 
 function hitPlayer(bll, ply) {
-    return bll.x + (bll.width / 2) > ply.x - (player.width / 2) &&
-        ply.x + (ply.width / 2) > ball.x &&
-        bll.y + bll.height >= ply.y &&
-        ball.y < ply.y + (ply.height / 2);
+    return
 }
 
 function changeDirection() {
@@ -217,8 +216,6 @@ function changeDirection() {
     } else {
         let CollidPoint = ball.x - player.x;
         let angle = CollidPoint * (Math.PI / 3);
-        vx = speed * Math.sin(angle);
-        vy = -speed * Math.cos(angle);
         document.querySelector("#speedAndDirection").innerHTML = vy;
     }
     document.querySelector("#life").innerHTML = life;
