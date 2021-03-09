@@ -78,6 +78,7 @@ button.x = app.view.width / 3;
 button.y = app.view.height / 2;
 button.interactive = true;
 button.buttonMode = true;
+button.on("click", startGame);
 
 //create first page
 let BlackRect = new PIXI.Graphics();
@@ -125,10 +126,8 @@ onload = function(e) {
 
 }
 
-button.on("click", startGame);
-
 vx = Math.floor(Math.random() * 10 + 100 / speed);
-vy = Math.floor(Math.random() * -10 + 100 / speed);
+vy = Math.floor(-1 * Math.random() * 10 + 100 / speed);
 
 function startGame() {
     ball.x = app.view.width / 2;
