@@ -128,6 +128,9 @@ onload = function(e) {
 }
 button.on("click", startGame);
 
+vx = Math.floor(Math.random() * 10 + 100 / speed);
+vy = Math.floor(Math.random() * 10 + 100 / speed);
+
 function startGame() {
     ball.x = app.view.width / 2;
     ball.y = app.view.height / 2;
@@ -143,8 +146,7 @@ function startGame() {
 }
 app.stage.interactive = true;
 app.stage.on("pointermove", movePlayer);
-vx = Math.floor(Math.random() * 10 + 100 / speed);
-vy = Math.floor(Math.random() * 10 + 100 / speed);
+
 
 function movePlayer(e) {
     let pos = e.data.global;
