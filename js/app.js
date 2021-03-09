@@ -191,7 +191,7 @@ function moveBall() {
 function hitPlayer(bll, ply) {
     return ball.x - ballRadius >= (player.x - player.width / 2) &&
         player.x + (player.width / 2) >= ball.x - ballRadius &&
-        ball.x + ball.width > player.x && player.x -
+        ball.y + (ball.height / 2) > player.x && player.y + (player.height / 2) > ball.y
 }
 
 function changeDirection() {
@@ -217,6 +217,9 @@ function changeDirection() {
     } else {
         let CollidPoint = ball.x - player.x;
         let angle = CollidPoint * (Math.PI / 2);
+        vx = speed * Math.cos(angle);
+        vy = speed * Math.sin(angle);
+
         document.querySelector("#speedAndDirection").innerHTML = vy;
     }
     document.querySelector("#life").innerHTML = life;
