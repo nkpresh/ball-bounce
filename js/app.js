@@ -215,7 +215,7 @@ function changeDirection() {
         winPage.visible = true;
     } else {
         let CollidPoint = ball.x - player.x;
-        let angle = CollidPoint * (Math.PI / 3);
+        let angle = CollidPoint * (Math.PI / 2);
         document.querySelector("#speedAndDirection").innerHTML = vy;
     }
     document.querySelector("#life").innerHTML = life;
