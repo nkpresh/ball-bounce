@@ -27,6 +27,8 @@ app.stage.on("pointermove", movePlayer);
 ball = new PIXI.Sprite.from("img/ball.png");
 ball.width = 30;
 ball.height = 30;
+ball.x = app.view.width / 2;
+ball.y = 0;
 ball.anchor.set(0.5);
 ballRadius = ball.width / 2;
 
@@ -132,8 +134,6 @@ vx = Math.floor(Math.random() * 10 + 100 / speed);
 vy = Math.floor((-1 * Math.random() * 10 + 100) / speed);
 
 function startGame() {
-    ball.x = app.view.width / 2;
-    ball.y = app.view.height / 2;
     app.stage.addChild(player);
     app.stage.addChild(ball);
     LosePage.visible = false;
@@ -184,7 +184,6 @@ function moveBall() {
             app.stage.removeChild(player);
             LosePage.visible = true;
         }
-
     }
 
 }
