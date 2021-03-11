@@ -156,7 +156,7 @@ function moveBall() {
     if (hitPlayer(ball, player)) {
         changeDirection();
     }
-    if (ball.x + (ballRadius + 5) > app.view.width || ball.x - (ballRadius - 5) < 0) {
+    if (ball.x + ballRadius >= app.view.width - 5 || ball.x - ballRadius <= 5) {
         vx = -vx;
     }
 
