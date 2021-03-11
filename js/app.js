@@ -193,37 +193,38 @@ function hitPlayer(bll, ply) {
         ply.x + (ply.width / 2) > ball.x &&
         bll.y + bll.height > ply.y && ply.y + (ply.height / 2) > ball.x
 
-
 }
 
 function changeDirection() {
-    point += 10;
-    if (point == 100) {
-        clearInterval(gameLoop);
-        app.stage.removeChild(player);
-        app.stage.removeChild(ball);
-        let winText = new PIXI.Text(`You Win ! ! ! Score :  ${point}`);
-        winText.anchor.set(0.5);
-        winText.x = app.view.width / 2;
-        winText.y = app.view.height / 3;
-        winText.width = 500;
-        winText.style = new PIXI.TextStyle({
-            fill: 0xAAAA,
-            fontSize: 80,
-            fontFamily: "Arcade"
-        });
-        winPage.addChild(winText);
-        winPage.addChild(replayButton);
+    // point += 10;
+    // if (point == 100) {
+    //     clearInterval(gameLoop);
+    //     app.stage.removeChild(player);
+    //     app.stage.removeChild(ball);
+    //     let winText = new PIXI.Text(`You Win ! ! ! Score :  ${point}`);
+    //     winText.anchor.set(0.5);
+    //     winText.x = app.view.width / 2;
+    //     winText.y = app.view.height / 3;
+    //     winText.width = 500;
+    //     winText.style = new PIXI.TextStyle({
+    //         fill: 0xAAAA,
+    //         fontSize: 80,
+    //         fontFamily: "Arcade"
+    //     });
+    //     winPage.addChild(winText);
+    //     winPage.addChild(replayButton);
 
-        winPage.visible = true;
-    } else {
-        let CollidPoint = ball.x - player.x;
-        let angle = CollidPoint * (Math.PI / 2);
-        vx = speed * Math.cos(angle);
-        vy = speed * Math.sin(angle);
+    //     winPage.visible = true;
+    // } else {
+    let collisionPoint = ball.x - (player.x + player.width / 2);
+    collisionPoint = collisionPoint / (player.width / 2);
+    angle = collisionPoint * Math.PI / 3;
 
-        document.querySelector("#speedAndDirection").innerHTML = vy;
-    }
+    vx = Math.cos(angle) * speed;
+    vy = Math.sin(angle) * speed;
+
+    document.querySelector("#speedAndDirection").innerHTML = vy;
+    // }
     document.querySelector("#life").innerHTML = life;
 
 }
