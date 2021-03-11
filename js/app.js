@@ -32,7 +32,7 @@ backGroundImage.width = app.view.width;
 backGroundImage.height = app.view.height;
 var image = new PIXI.Sprite.from("img/background.png");
 image.width = app.view.width;
-image.height = app.view.height;
+image.height = app.view.height + 80;
 backGroundImage.addChild(image);
 
 //create ball
@@ -43,7 +43,7 @@ ball.anchor.set(0.5);
 let ballRadius = ball.width / 2;
 
 //create player
-player = new PIXI.Sprite.from("img/player.png");
+player = new PIXI.Sprite.from("img/paddle.png");
 player.width = 147;
 player.height = 21;
 player.anchor.set(0.5);
