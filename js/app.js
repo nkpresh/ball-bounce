@@ -74,8 +74,8 @@ winPage = new PIXI.Container();
 
 //button
 button = new PIXI.Sprite.from("img/play.png");
-button.height = 100;
-button.width = 100;
+button.height = 60;
+button.width = 60;
 button.x = app.view.width / 3;
 button.y = app.view.height / 2;
 button.interactive = true;
@@ -84,7 +84,7 @@ button.on("click", startGame);
 
 //create first page
 let BlackRect = new PIXI.Graphics();
-BlackRect.beginFill(0xAAAAA);
+BlackRect.beginFill(0x111111);
 BlackRect.drawRect(0, 0, app.view.width, app.view.height);
 firstPage.addChild(BlackRect);
 let text = new PIXI.Text("Welcome!!!");
@@ -93,14 +93,14 @@ text.x = app.view.width / 2;
 text.y = app.view.height / 3;
 text.width = 500;
 text.style = new PIXI.TextStyle({
-    fill: 0x111111,
+    fill: 0xe74c3c,
     fontSize: 80,
     fontFamily: "Arcade"
 });
 
 //lose Page
 let NewRect = new PIXI.Graphics();
-NewRect.beginFill(0x111111);
+NewRect.beginFill(0x4ec7f2);
 NewRect.drawRect(0, 0, app.view.width, app.view.height);
 LosePage.addChild(NewRect);
 
@@ -169,13 +169,13 @@ function moveBall() {
         life--;
         if (life == 0) {
             clearInterval(gameLoop);
-            let text1 = new PIXI.Text(`YOU LOSE!  SCORE: ${point}`);
+            let text1 = new PIXI.Text(`Try Again: ${point}`);
             text1.anchor.set(0.5);
             text1.x = app.view.width / 2;
             text1.y = app.view.height / 3;
             text1.width = 500;
             text1.style = new PIXI.TextStyle({
-                fill: 0xAAAA,
+                fill: 0x4ec7f2,
                 fontSize: 30,
                 fontFamily: "Arcade"
             });
