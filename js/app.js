@@ -12,9 +12,9 @@ var point = 0;
 var life = 3;
 let replay;
 let backGroundImage;
-//unstaged
 let winQuitButton;
 let loseQuitButton;
+//unstaged
 let bricks;
 let treasure;
 
@@ -146,6 +146,12 @@ winRect.drawRect(0, 0, app.view.width, app.view.height);
 winPage.addChild(winRect);
 winPage.addChild(winQuitButton);
 
+treasure = new PIXI.Sprite.from("img/treasure.png")
+treasure.height = 60
+treasure.width = 60;
+treasure.y = app.view.width / 3;
+treasure.x = Math.random() * app.view.width;
+
 onload = function(e) {
     app.stage.addChild(backGroundImage);
     e.preventDefault();
@@ -172,6 +178,7 @@ function startGame() {
     ball.y = app.view.width / 2;
     app.stage.addChild(player);
     app.stage.addChild(ball);
+    app.stage.addChild(treasure);
     LosePage.visible = false;
     winPage.visible = false;
 
@@ -214,6 +221,8 @@ function moveBall() {
             LosePage.addChild(text1);
             app.stage.removeChild(ball);
             app.stage.removeChild(player);
+            app.stage.removeChild(treasure);
+
             LosePage.visible = true;
         }
     }
@@ -236,6 +245,8 @@ function changeDirection() {
         clearInterval(gameLoop);
         app.stage.removeChild(player);
         app.stage.removeChild(ball);
+        app.stage.removeChild(treasure);
+
         let winText = new PIXI.Text(`You Win ! ! ! Score :  ${point}`);
         winText.anchor.set(0.5);
         winText.x = app.view.width / 2;
