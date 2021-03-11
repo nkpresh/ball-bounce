@@ -153,9 +153,6 @@ function moveBall() {
     ball.x += vx;
     ball.y += vy;
 
-    if (hitPlayer(ball, player)) {
-        changeDirection();
-    }
     if (ball.x + ballRadius >= app.view.width - 5 || ball.x - ballRadius <= 5) {
         vx = -vx;
     }
@@ -164,9 +161,9 @@ function moveBall() {
         vy = -vy;
     }
 
-    if (ball.y + (ball.height / 2) > app.view.height) {
+    if (ball.y + ballRadius > app.view.height - 10) {
         life--;
-        if (life == 0) {
+        if (life === 0) {
             clearInterval(gameLoop);
             let text1 = new PIXI.Text(`Try Again: ${point}`);
             text1.anchor.set(0.5);
@@ -183,6 +180,9 @@ function moveBall() {
             LosePage.visible = true;
         }
     }
+    if (hitPlayer(ball, player)) {
+        changeDirection();
+    }
 
 }
 
@@ -194,35 +194,33 @@ function hitPlayer(bll, ply) {
 }
 
 function changeDirection() {
-    // point += 10;
-    // if (point == 100) {
-    //     clearInterval(gameLoop);
-    //     app.stage.removeChild(player);
-    //     app.stage.removeChild(ball);
-    //     let winText = new PIXI.Text(`You Win ! ! ! Score :  ${point}`);
-    //     winText.anchor.set(0.5);
-    //     winText.x = app.view.width / 2;
-    //     winText.y = app.view.height / 3;
-    //     winText.width = 500;
-    //     winText.style = new PIXI.TextStyle({
-    //         fill: 0xAAAA,
-    //         fontSize: 80,
-    //         fontFamily: "Arcade"
-    //     });
-    //     winPage.addChild(winText);
-    //     winPage.addChild(replayButton);
+    point += 10;
+    if (point == 100) {
+        clearInterval(gameLoop);
+        app.stage.removeChild(player);
+        app.stage.removeChild(ball);
+        let winText = new PIXI.Text(`You Win ! ! ! Score :  ${point}`);
+        winText.anchor.set(0.5);
+        winText.x = app.view.width / 2;
+        winText.y = app.view.height / 3;
+        winText.width = 500;
+        winText.style = new PIXI.TextStyle({
+            fill: 0xAAAA,
+            fontSize: 80,
+            fontFamily: "Arcade"
+        });
+        winPage.addChild(winText);
+        winPage.addChild(replayButton);
 
-    //     winPage.visible = true;
-    // } else {
-    let collisionPoint = ball.x - (player.x + player.width / 2);
-    collisionPoint = collisionPoint / (player.width / 2);
-    angle = collisionPoint * Math.PI / 3;
+        winPage.visible = true;
+    } else {
+        let collisionPoint = ball.x - (player.x + player.width / 2);
+        collisionPoint = collisionPoint / (player.width / 2);
+        angle = collisionPoint * Math.PI / 3;
 
-    vx = Math.cos(angle) * speed;
-    vy = Math.sin(angle) * speed;
-
-    document.querySelector("#speedAndDirection").innerHTML = vy;
-    // }
+        vx = Math.cos(angle) * speed;
+        vy = Math.sin(angle) * speed;
+    }
     document.querySelector("#life").innerHTML = life;
 
 }
