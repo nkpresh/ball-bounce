@@ -11,6 +11,10 @@ let button;
 var point = 0;
 var life = 3;
 let replay;
+let quitButton;
+let bricks;
+let treasure;
+let backGroundImage;
 
 app = new PIXI.Application({
     width: 600,
