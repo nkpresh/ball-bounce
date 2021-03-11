@@ -23,9 +23,17 @@ app = new PIXI.Application({
     backgroundColor: 0xAAAAAA,
 
 });
-
 app.stage.interactive = true;
 app.stage.on("pointermove", movePlayer);
+
+//backGroundImage
+backGroundImage = new PIXI.Container();
+backGroundImage.width = app.view.width;
+backGroundImage.height = app.view.height;
+var image = new PIXI.Sprite.from("img/background.png");
+image.width = app.view.width;
+image.height = app.view.height;
+backGroundImage.addChild(image);
 
 //create ball
 ball = new PIXI.Sprite.from("img/ball.png");
@@ -115,7 +123,7 @@ winRect.drawRect(0, 0, app.view.width, app.view.height);
 winPage.addChild(winRect);
 
 onload = function(e) {
-
+    app.stage.addChild(backGroundImage);
     e.preventDefault();
     canvas.appendChild(app.view);
 
