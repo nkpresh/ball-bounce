@@ -107,10 +107,10 @@ loseQuitButton.interactive = true;
 loseReplay.on("click", startGame)
 
 //button
-button = new PIXI.Sprite.from("img/play.png");
+button = new PIXI.Sprite.from("img/playButton.png");
 button.height = 60;
-button.width = 60;
-button.x = app.view.width / 2;
+button.width = 150;
+button.x = app.view.width / 2.5;
 button.y = app.view.height / 2;
 button.interactive = true;
 button.buttonMode = true;
