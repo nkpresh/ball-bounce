@@ -127,8 +127,8 @@ onload = function(e) {
 
 }
 
-vx = Math.floor(Math.random() * 10 + 100 / speed);
-vy = Math.floor((-1 * Math.random() * 10 + 100) / speed);
+vx = 10;
+vy = -10;
 
 function startGame() {
     ball.x = app.view.width / 2;
@@ -165,7 +165,7 @@ function moveBall() {
         life--;
         if (life === 0) {
             clearInterval(gameLoop);
-            let text1 = new PIXI.Text(`Try Again: ${point}`);
+            let text1 = new PIXI.Text(`Game Over: ${point}`);
             text1.anchor.set(0.5);
             text1.x = app.view.width / 2;
             text1.y = app.view.height / 3;
@@ -213,6 +213,7 @@ function changeDirection() {
         winPage.addChild(replayButton);
 
         winPage.visible = true;
+        point = 0;
     } else {
         let collisionPoint = ball.x - (player.x + player.width / 2);
         collisionPoint = collisionPoint / (player.width / 2);
