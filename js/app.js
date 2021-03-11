@@ -11,11 +11,17 @@ let button;
 var point = 0;
 var life = 3;
 let replay;
+let backGroundImage;
 //unstaged
-let quitButton;
+let winQuitButton;
+let loseQuitButton;
 let bricks;
 let treasure;
-let backGroundImage;
+
+//initialize pages
+firstPage = new PIXI.Container();
+LosePage = new PIXI.Container();
+winPage = new PIXI.Container();
 
 app = new PIXI.Application({
     width: 600,
@@ -65,6 +71,17 @@ replayButton.interactive = true;
 //replay functionality
 replayButton.on("click", startGame)
 
+//win quite button
+winQuitButton = new PIXI.Sprite.from("img/quitButton.png");
+winQuitButton.height = 60;
+winQuitButton.width = 100;
+winQuitButton.anchor.set(0.5);
+winQuitButton.x = app.view.width / 2;
+winQuitButton.y = 400;
+
+winQuitButton.buttonMode = true;
+winQuitButton.interactive = true;
+
 //replay button for lose
 var loseReplay = new PIXI.Sprite(replay);
 loseReplay.height = 100;
@@ -75,14 +92,19 @@ loseReplay.y = 300;
 loseReplay.buttonMode = true;
 loseReplay.interactive = true;
 
+//lose quite button
+loseQuitButton = new PIXI.Sprite.from("img/quitButton.png");
+loseQuitButton.height = 60;
+loseQuitButton.width = 100;
+loseQuitButton.anchor.set(0.5);
+loseQuitButton.x = app.view.width / 2;
+loseQuitButton.y = 400;
+
+loseQuitButton.buttonMode = true;
+loseQuitButton.interactive = true;
+
 //lose replay functionality
 loseReplay.on("click", startGame)
-
-
-//initialize pages
-firstPage = new PIXI.Container();
-LosePage = new PIXI.Container();
-winPage = new PIXI.Container();
 
 //button
 button = new PIXI.Sprite.from("img/play.png");
@@ -115,12 +137,14 @@ let NewRect = new PIXI.Graphics();
 NewRect.beginFill(0x111111);
 NewRect.drawRect(0, 0, app.view.width, app.view.height);
 LosePage.addChild(NewRect);
+LosePage.addChild(loseQuitButton);
 
 //win Page
 let winRect = new PIXI.Graphics();
 winRect.beginFill(0x111111);
 winRect.drawRect(0, 0, app.view.width, app.view.height);
 winPage.addChild(winRect);
+winPage.addChild(winQuitButton);
 
 onload = function(e) {
     app.stage.addChild(backGroundImage);
