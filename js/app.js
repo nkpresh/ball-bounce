@@ -100,7 +100,7 @@ text.style = new PIXI.TextStyle({
 
 //lose Page
 let NewRect = new PIXI.Graphics();
-NewRect.beginFill(0x4ec7f2);
+NewRect.beginFill(0x111111);
 NewRect.drawRect(0, 0, app.view.width, app.view.height);
 LosePage.addChild(NewRect);
 
@@ -157,11 +157,11 @@ function moveBall() {
     if (hitPlayer(ball, player)) {
         changeDirection();
     }
-    if (ball.x + (ball.width / 2) > app.view.width || ball.x - (ball.width / 2) < 0) {
+    if (ball.x + ball.width > app.view.width || ball.x < 0) {
         vx = -vx;
     }
 
-    if (ball.y - (ball.height / 2) < 0) {
+    if (ball.y < 0) {
         vy = -vy;
     }
 
@@ -173,7 +173,6 @@ function moveBall() {
             text1.anchor.set(0.5);
             text1.x = app.view.width / 2;
             text1.y = app.view.height / 3;
-            text1.width = 500;
             text1.style = new PIXI.TextStyle({
                 fill: 0x4ec7f2,
                 fontSize: 30,
