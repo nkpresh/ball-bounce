@@ -84,8 +84,8 @@ winQuitButton.interactive = true;
 
 //replay button for lose
 var loseReplay = new PIXI.Sprite(replay);
-loseReplay.height = 100;
-loseReplay.width = 100;
+loseReplay.height = 80;
+loseReplay.width = 80;
 loseReplay.anchor.set(0.5);
 loseReplay.x = app.view.width / 2;
 loseReplay.y = 300;
@@ -110,7 +110,7 @@ loseReplay.on("click", startGame)
 button = new PIXI.Sprite.from("img/play.png");
 button.height = 60;
 button.width = 60;
-button.x = app.view.width / 3;
+button.x = app.view.width / 2;
 button.y = app.view.height / 2;
 button.interactive = true;
 button.buttonMode = true;
