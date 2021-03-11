@@ -11,7 +11,6 @@ let button;
 var point = 0;
 var life = 3;
 let replay;
-let ballRadius;
 
 app = new PIXI.Application({
     width: 600,
@@ -28,7 +27,7 @@ ball = new PIXI.Sprite.from("img/ball.png");
 ball.width = 30;
 ball.height = 30;
 ball.anchor.set(0.5);
-ballRadius = ball.width / 2;
+let ballRadius = ball.width / 2;
 
 //create player
 player = new PIXI.Sprite.from("img/player.png");
@@ -157,7 +156,7 @@ function moveBall() {
     if (hitPlayer(ball, player)) {
         changeDirection();
     }
-    if (ball.x + ball.width > app.view.width || ball.x < 0) {
+    if (ball.x + (ball.width) > app.view.width || ball.x - (ball.width / 2) < 0) {
         vx = -vx;
     }
 
