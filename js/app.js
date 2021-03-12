@@ -10,8 +10,9 @@ let canvas = document.querySelector("#canvas");
 let button;
 var point = 0;
 var life = 3;
-let replay;
-//not functional
+let replay = new PIXI.Texture.from("img/replayBtn.png");
+var text1
+    //not functional
 let backGroundImage;
 let winQuitButton;
 let loseQuitButton;
@@ -57,70 +58,9 @@ player.anchor.set(0.5);
 player.x = app.view.width / 2;
 player.y = app.view.height - 10;
 
-//bricks
-app.loader.baseUrl = "img";
-app.loader.add("bricks", "pieceOfBrick.png");
-app.loader.load(doneLoading);
-
-function doneLoading() {
-
-}
-//replay button winner
-replay = new PIXI.Texture.from("img/replayBtn.png");
-var replayButton = new PIXI.Sprite(replay);
-replayButton.height = 100;
-replayButton.width = 100;
-replayButton.anchor.set(0.5);
-replayButton.x = app.view.width / 2;
-replayButton.y = 300;
-
-replayButton.buttonMode = true;
-replayButton.interactive = true;
-
-//replay functionality
-replayButton.on("click", startGame)
-
-//win quite button
-winQuitButton = new PIXI.Sprite.from("img/quitButton.png");
-winQuitButton.height = 60;
-winQuitButton.width = 100;
-winQuitButton.anchor.set(0.5);
-winQuitButton.x = app.view.width / 2;
-winQuitButton.y = 400;
-
-winQuitButton.buttonMode = true;
-winQuitButton.interactive = true;
-
-//win quit 
-winQuitButton.on("click", leaveGame);
-
 function leaveGame(e) {
 
 }
-
-//replay button for lose
-var loseReplay = new PIXI.Sprite(replay);
-loseReplay.height = 80;
-loseReplay.width = 80;
-loseReplay.anchor.set(0.5);
-loseReplay.x = app.view.width / 2;
-loseReplay.y = 300;
-loseReplay.buttonMode = true;
-loseReplay.interactive = true;
-
-//lose quite button
-loseQuitButton = new PIXI.Sprite.from("img/quitButton.png");
-loseQuitButton.height = 60;
-loseQuitButton.width = 100;
-loseQuitButton.anchor.set(0.5);
-loseQuitButton.x = app.view.width / 2;
-loseQuitButton.y = 400;
-
-loseQuitButton.buttonMode = true;
-loseQuitButton.interactive = true;
-
-//lose replay functionality
-loseReplay.on("click", startGame)
 
 //button
 button = new PIXI.Sprite.from("img/playButton.png");
@@ -153,13 +93,76 @@ let NewRect = new PIXI.Graphics();
 NewRect.beginFill(0x111111);
 NewRect.drawRect(0, 0, app.view.width, app.view.height);
 LosePage.addChild(NewRect);
+
+//replay button for lose
+var loseReplay = new PIXI.Sprite(replay);
+loseReplay.height = 80;
+loseReplay.width = 80;
+loseReplay.anchor.set(0.5);
+loseReplay.x = app.view.width / 2;
+loseReplay.y = 300;
+loseReplay.buttonMode = true;
+loseReplay.interactive = true;
+
+//lose quite button
+loseQuitButton = new PIXI.Sprite.from("img/quitButton.png");
+loseQuitButton.height = 60;
+loseQuitButton.width = 100;
+loseQuitButton.anchor.set(0.5);
+loseQuitButton.x = app.view.width / 2;
+loseQuitButton.y = 400;
+
+loseQuitButton.buttonMode = true;
+loseQuitButton.interactive = true;
+
+//lose replay functionality
+loseReplay.on("click", startGame)
 LosePage.addChild(loseQuitButton);
+LosePage.addChild(loseReplay);
+var text1 = new PIXI.Text(`Game Over:`);
+text1.anchor.set(0.5);
+text1.x = app.view.width / 2;
+text1.y = app.view.height / 3;
+text1.style = new PIXI.TextStyle({
+    fill: 0x4ec7f2,
+    fontSize: 30,
+    fontFamily: "Arcade"
+});
+LosePage.addChild(text1);
 
 //win Page
 let winRect = new PIXI.Graphics();
 winRect.beginFill(0x111111);
 winRect.drawRect(0, 0, app.view.width, app.view.height);
 winPage.addChild(winRect);
+
+
+var replayButton = new PIXI.Sprite(replay);
+replayButton.height = 100;
+replayButton.width = 100;
+replayButton.anchor.set(0.5);
+replayButton.x = app.view.width / 2;
+replayButton.y = 300;
+
+replayButton.buttonMode = true;
+replayButton.interactive = true;
+
+//replay functionality
+replayButton.on("click", startGame)
+
+//win quite button
+winQuitButton = new PIXI.Sprite.from("img/quitButton.png");
+winQuitButton.height = 60;
+winQuitButton.width = 100;
+winQuitButton.anchor.set(0.5);
+winQuitButton.x = app.view.width / 2;
+winQuitButton.y = 400;
+
+winQuitButton.buttonMode = true;
+winQuitButton.interactive = true;
+
+//win quit 
+winQuitButton.on("click", leaveGame);
 winPage.addChild(winQuitButton);
 
 treasure = new PIXI.Sprite.from("img/treasure.png")
@@ -167,7 +170,6 @@ treasure.height = 60
 treasure.width = 60;
 treasure.y = Math.random() + 15 * app.view.width / 3;
 treasure.x = Math.random() * app.view.width / 1.5;
-let score;
 onload = function(e) {
     app.stage.addChild(backGroundImage);
     e.preventDefault();
@@ -177,12 +179,11 @@ onload = function(e) {
     app.stage.addChild(winPage);
     app.stage.addChild(LosePage);
 
-
-    LosePage.visible = false;
-    winPage.visible = false;
-
     firstPage.addChild(text);
     firstPage.addChild(button);
+    firstPage.visible = true;
+    LosePage.visible = false;
+    winPage.visible = false;
 }
 
 vx = 10;
@@ -190,8 +191,8 @@ vy = -10;
 
 function startGame() {
     point = 0;
-    LosePage.visible = false;
     winPage.visible = false;
+    LosePage.visible = false;
     ball.x = app.view.width / 2;
     ball.y = app.view.width / 2;
     app.stage.addChild(player);
@@ -208,16 +209,7 @@ function movePlayer(e) {
     let pos = e.data.global;
     player.x = pos.x;
 }
-var text1;
-text1.anchor.set(0.5);
-text1.x = app.view.width / 2;
-text1.y = app.view.height / 3;
-text1.style = new PIXI.TextStyle({
-    fill: 0x4ec7f2,
-    fontSize: 30,
-    fontFamily: "Arcade"
-});
-LosePage.addChild(text1);
+
 
 function moveBall() {
     ball.x += vx;
@@ -233,14 +225,14 @@ function moveBall() {
 
     if (ball.y + ballRadius >= app.view.height - 10) {
         life--;
+        point = point;
         if (life == 0) {
-
-            text1 = new PIXI.Text(`Game Over: ${score}`);
+            clearInterval(gameLoop);
             app.stage.removeChild(ball);
             app.stage.removeChild(player);
             app.stage.removeChild(treasure);
+            text1 = PIXI.Text("Game Over: " + point);
             LosePage.visible = true;
-
         } else {
             resetBall();
         }
