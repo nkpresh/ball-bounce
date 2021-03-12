@@ -11,12 +11,13 @@ let button;
 var point = 0;
 var life = 3;
 let replay;
+//not functional
 let backGroundImage;
 let winQuitButton;
 let loseQuitButton;
+let treasure;
 //unstaged
 let bricks;
-let treasure;
 
 //initialize pages
 firstPage = new PIXI.Container();
@@ -56,6 +57,14 @@ player.anchor.set(0.5);
 player.x = app.view.width / 2;
 player.y = app.view.height - 10;
 
+//bricks
+app.loader.baseUrl = "img";
+app.loader.add("bricks", "pieceOfBrick.png");
+app.loader.load(doneLoading);
+
+function doneLoading() {
+
+}
 //replay button winner
 replay = new PIXI.Texture.from("img/replayBtn.png");
 var replayButton = new PIXI.Sprite(replay);
@@ -149,8 +158,8 @@ winPage.addChild(winQuitButton);
 treasure = new PIXI.Sprite.from("img/treasure.png")
 treasure.height = 60
 treasure.width = 60;
-treasure.y = app.view.width / 3;
-treasure.x = Math.random() * app.view.width;
+treasure.y = Math.random() + 15 * app.view.width / 3;
+treasure.x = Math.random() * app.view.width / 1.5;
 
 onload = function(e) {
     app.stage.addChild(backGroundImage);
@@ -158,7 +167,6 @@ onload = function(e) {
     canvas.appendChild(app.view);
 
     app.stage.addChild(firstPage);
-    app.stage.addChild(LosePage);
     app.stage.addChild(winPage);
 
     LosePage.visible = false;
@@ -174,13 +182,14 @@ vx = 10;
 vy = -10;
 
 function startGame() {
+
+    app.stage.removeChild(LosePage);
+    app.stage.removeChild(winPage);
     ball.x = app.view.width / 2;
     ball.y = app.view.width / 2;
     app.stage.addChild(player);
     app.stage.addChild(ball);
     app.stage.addChild(treasure);
-    LosePage.visible = false;
-    winPage.visible = false;
 
     firstPage.visible = false;
     document.querySelector("#life").innerHTML = life;
@@ -207,8 +216,11 @@ function moveBall() {
 
     if (ball.y + ballRadius > app.view.height - 10) {
         life--;
-        if (life === 0) {
+        if (life == 0) {
             clearInterval(gameLoop);
+            app.stage.removeChild(ball);
+            app.stage.removeChild(player);
+            app.stage.removeChild(treasure);
             let text1 = new PIXI.Text(`Game Over: ${point}`);
             text1.anchor.set(0.5);
             text1.x = app.view.width / 2;
@@ -219,17 +231,25 @@ function moveBall() {
                 fontFamily: "Arcade"
             });
             LosePage.addChild(text1);
-            app.stage.removeChild(ball);
-            app.stage.removeChild(player);
-            app.stage.removeChild(treasure);
-
+            app.stage.addChild(LosePage);
             LosePage.visible = true;
+            life = 3;
+            point = 0;
+        } else {
+            resetBall();
         }
+
     }
     if (hitPlayer(ball, player)) {
         changeDirection();
     }
 
+}
+
+function resetBall() {
+    ball.x = app.view.width / 2;
+    ball.y = player.y - ballRadius
+    vx = 3 * (Math.random() * 2 - 1);
 }
 
 function hitPlayer(bll, ply) {
@@ -260,8 +280,12 @@ function changeDirection() {
         winPage.addChild(winText);
         winPage.addChild(replayButton);
 
+        app.stage.addChild(winPage);
+
+
         winPage.visible = true;
         point = 0;
+        life = 3;
     } else {
         let collisionPoint = ball.x - (player.x + player.width / 2);
         collisionPoint = collisionPoint / (player.width / 2);
