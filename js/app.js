@@ -11,8 +11,8 @@ let button;
 var point = 0;
 var life = 3;
 let replay = new PIXI.Texture.from("img/replayBtn.png");
-var text1
-    //not functional
+var text1;
+//not functional
 let backGroundImage;
 let winQuitButton;
 let loseQuitButton;
@@ -119,16 +119,7 @@ loseQuitButton.interactive = true;
 loseReplay.on("click", startGame)
 LosePage.addChild(loseQuitButton);
 LosePage.addChild(loseReplay);
-var text1 = new PIXI.Text(`Game Over:`);
-text1.anchor.set(0.5);
-text1.x = app.view.width / 2;
-text1.y = app.view.height / 3;
-text1.style = new PIXI.TextStyle({
-    fill: 0x4ec7f2,
-    fontSize: 30,
-    fontFamily: "Arcade"
-});
-LosePage.addChild(text1);
+
 
 //win Page
 let winRect = new PIXI.Graphics();
@@ -165,11 +156,6 @@ winQuitButton.interactive = true;
 winQuitButton.on("click", leaveGame);
 winPage.addChild(winQuitButton);
 
-treasure = new PIXI.Sprite.from("img/treasure.png")
-treasure.height = 60
-treasure.width = 60;
-treasure.y = Math.random() + 15 * app.view.width / 3;
-treasure.x = Math.random() * app.view.width / 1.5;
 onload = function(e) {
     app.stage.addChild(backGroundImage);
     e.preventDefault();
@@ -191,6 +177,7 @@ vy = -10;
 
 function startGame() {
     point = 0;
+    LosePage.removeChild(text1);
     winPage.visible = false;
     LosePage.visible = false;
     ball.x = app.view.width / 2;
@@ -223,7 +210,7 @@ function moveBall() {
         vy = -vy;
     }
 
-    if (ball.y + ballRadius >= app.view.height - 10) {
+    if (ball.y + (ball.width / 2) >= app.view.height) {
         life--;
         point = point;
         if (life == 0) {
@@ -231,12 +218,21 @@ function moveBall() {
             app.stage.removeChild(ball);
             app.stage.removeChild(player);
             app.stage.removeChild(treasure);
-            text1 = PIXI.Text("Game Over: " + point);
+            text1 = new PIXI.Text(`Game Over: ${point}`);
+            text1.anchor.set(0.5);
+            text1.x = app.view.width / 2;
+            text1.y = app.view.height / 3;
+            text1.style = new PIXI.TextStyle({
+                fill: 0x4ec7f2,
+                fontSize: 30,
+                fontFamily: "Arcade"
+            });
+            LosePage.addChild(text1);
             LosePage.visible = true;
+
         } else {
             resetBall();
         }
-
     }
     if (hitPlayer(ball, player)) {
         changeDirection();
