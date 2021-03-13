@@ -95,7 +95,11 @@ function createTreasure() {
 }
 
 //bricks
-bricks
+bricks["wallBricks"] = [
+    new PIXI.Sprite.from("img/Brick.png"),
+    new PIXI.Sprite.from("img/Brick.png"),
+    new PIXI.Sprite.from("img/Brick.png"),
+]
 
 
 // let keysDiv = document.querySelector("#canvas");
