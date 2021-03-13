@@ -19,8 +19,8 @@ let loseQuitButton;
 let treasure = [];
 let TreasureBox;
 //unstaged
-let bricks;
-
+let bricks = [];
+let brickWall;
 
 //initialize pages
 firstPage = new PIXI.Container();
@@ -93,6 +93,11 @@ function createTreasure() {
     treasureBox.play();
 
 }
+
+//bricks
+bricks
+
+
 // let keysDiv = document.querySelector("#canvas");
 // let keys = {};
 
@@ -115,9 +120,6 @@ function createTreasure() {
 //         treasureBox.x -= speed;
 //     }
 // }
-
-//bricks
-bricks = new PIXI.Sprite.from("img/Brick.png");
 
 
 //button
