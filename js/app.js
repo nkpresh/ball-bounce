@@ -106,7 +106,7 @@ function loadBricks() {
         brick.height = 50;
         brick.width = 150;
         brick.x = app.view.width / 2;
-        brick.height = (app.view.width / 2) + py;
+        brick.y = (app.view.width / 2) + py;
         py += brick.height;
     });
 }
