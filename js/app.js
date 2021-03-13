@@ -20,7 +20,6 @@ let treasure = [];
 let TreasureBox;
 //unstaged
 let bricks = [];
-let brickWall;
 
 //initialize pages
 firstPage = new PIXI.Container();
@@ -95,11 +94,18 @@ function createTreasure() {
 }
 
 //bricks
-bricks["wallBricks"] = [
+bricks = [
     new PIXI.Sprite.from("img/Brick.png"),
     new PIXI.Sprite.from("img/Brick.png"),
     new PIXI.Sprite.from("img/Brick.png"),
-]
+];
+
+function loadBricks() {
+    bricks.forEach(brick => {
+        brick.height = 50;
+        brick.width = 150;
+    });
+}
 
 
 // let keysDiv = document.querySelector("#canvas");
@@ -222,6 +228,7 @@ winPage.addChild(winQuitButton);
 
 
 onload = function(e) {
+    loadBricks();
     app.stage.addChild(backGroundImage);
     e.preventDefault();
     canvas.appendChild(app.view);
