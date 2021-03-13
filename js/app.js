@@ -108,6 +108,8 @@ function loadBricks() {
         brick.x = app.view.width / 2;
         brick.y = (app.view.width / 2) + py;
         py += brick.height;
+
+        app.stage.addChild(brick)
     });
 }
 
@@ -232,7 +234,6 @@ winPage.addChild(winQuitButton);
 
 
 onload = function(e) {
-    loadBricks();
     app.stage.addChild(backGroundImage);
     e.preventDefault();
     canvas.appendChild(app.view);
@@ -252,6 +253,7 @@ vx = 10;
 vy = -10;
 
 function startGame() {
+    loadBricks();
     point = 0;
     LosePage.removeChild(text1);
     winPage.visible = false;
