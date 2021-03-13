@@ -12,13 +12,14 @@ var point = 0;
 var life = 3;
 let replay = new PIXI.Texture.from("img/replayBtn.png");
 var text1;
-//not functional
 let backGroundImage;
+//not functional
 let winQuitButton;
 let loseQuitButton;
-let treasure;
 //unstaged
 let bricks;
+let treasure = [];
+let TreasureBox;
 
 //initialize pages
 firstPage = new PIXI.Container();
@@ -58,8 +59,60 @@ player.anchor.set(0.5);
 player.x = app.view.width / 2;
 player.y = app.view.height - 10;
 
-function leaveGame(e) {
+//treasure box
+app.loader.baseUrl = "img"
+app.loader.add("treasureBox", "treasureBox.png");
 
+function doneLoading(e) {
+    createTreasureSheet();
+    createTreasure();
+    // app.ticker.add(loopGame);
+}
+
+function createTreasureSheet() {
+    let sSheet = new PIXI.BaseTexture.from(app.loader.resources["treasureBox"].url);
+    let w = 50;
+    let h = 35;
+
+    treasure["lockTreasure"] = [
+        new PIXI.Texture(sSheet, new PIXI.Rectangle(0, 0, w, h))
+    ];
+    treasure["openTreasure"] = [
+        new PIXI.Texture(sSheet, new PIXI.Rectangle(1 * w, 0, w, h))
+    ];
+}
+
+function createTreasure() {
+    treasureBox = new PIXI.AnimatedSprite(treasure.openTreasure);
+    treasureBox.anchor.set(0.5);
+    treasureBox.loop = false;
+    treasureBox.x = Math.random() * app.view.width;
+    treasureBox.y = Math.random() * app.view.height / 3;
+    app.stage.addChild(treasureBox);
+    treasureBox.play();
+
+}
+let keysDiv = document.querySelector("#canvas");
+let keys = {};
+
+function loopGame(e) {
+    keysDiv.innerHTML = JSON.stringify(keys);
+    //W
+    if (keys[87]) {
+        if (!treasureBox.playing) {
+            treasureBox.textures = treasure.openTreasure;
+            treasureBox.play()
+        }
+        treasureBox.y -= speed;
+    }
+    //A
+    if (keys[65]) {
+        if (!treasureBox.playing) {
+            treasureBox.textures = treasure.lockTreasure;
+            treasureBox.play()
+        }
+        treasureBox.x -= speed;
+    }
 }
 
 //button
@@ -153,8 +206,9 @@ winQuitButton.buttonMode = true;
 winQuitButton.interactive = true;
 
 //win quit 
-winQuitButton.on("click", leaveGame);
+// winQuitButton.on("click", leaveGame);
 winPage.addChild(winQuitButton);
+
 
 onload = function(e) {
     app.stage.addChild(backGroundImage);
@@ -184,11 +238,11 @@ function startGame() {
     ball.y = app.view.width / 2;
     app.stage.addChild(player);
     app.stage.addChild(ball);
-    app.stage.addChild(treasure);
     life = 3;
     firstPage.visible = false;
     document.querySelector("#life").innerHTML = life;
     gameLoop = setInterval(moveBall, 1000 / speed);
+    app.loader.load(doneLoading);
 
 }
 
