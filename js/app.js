@@ -275,6 +275,9 @@ function movePlayer(e) {
     player.x = pos.x;
 }
 
+function bounceOnBricks() {
+
+}
 
 function moveBall() {
     ball.x += vx;
