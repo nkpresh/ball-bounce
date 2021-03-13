@@ -16,10 +16,11 @@ let backGroundImage;
 //not functional
 let winQuitButton;
 let loseQuitButton;
-//unstaged
-let bricks;
 let treasure = [];
 let TreasureBox;
+//unstaged
+let bricks;
+
 
 //initialize pages
 firstPage = new PIXI.Container();
@@ -92,28 +93,31 @@ function createTreasure() {
     treasureBox.play();
 
 }
-let keysDiv = document.querySelector("#canvas");
-let keys = {};
+// let keysDiv = document.querySelector("#canvas");
+// let keys = {};
 
-function loopGame(e) {
-    keysDiv.innerHTML = JSON.stringify(keys);
-    //W
-    if (keys[87]) {
-        if (!treasureBox.playing) {
-            treasureBox.textures = treasure.openTreasure;
-            treasureBox.play()
-        }
-        treasureBox.y -= speed;
-    }
-    //A
-    if (keys[65]) {
-        if (!treasureBox.playing) {
-            treasureBox.textures = treasure.lockTreasure;
-            treasureBox.play()
-        }
-        treasureBox.x -= speed;
-    }
-}
+// function loopGame(e) {
+//     keysDiv.innerHTML = JSON.stringify(keys);
+//     //W
+//     if (keys[87]) {
+//         if (!treasureBox.playing) {
+//             treasureBox.textures = treasure.openTreasure;
+//             treasureBox.play()
+//         }
+//         treasureBox.y -= speed;
+//     }
+//     //A
+//     if (keys[65]) {
+//         if (!treasureBox.playing) {
+//             treasureBox.textures = treasure.lockTreasure;
+//             treasureBox.play()
+//         }
+//         treasureBox.x -= speed;
+//     }
+// }
+
+bricks = new PIXI.Sprite.from("img/Brick.png");
+
 
 //button
 button = new PIXI.Sprite.from("img/playButton.png");
