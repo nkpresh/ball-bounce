@@ -101,9 +101,13 @@ bricks = [
 ];
 
 function loadBricks() {
+    let py = 0;
     bricks.forEach(brick => {
         brick.height = 50;
         brick.width = 150;
+        brick.x = app.view.width / 2;
+        brick.height = (app.view.width / 2) + py;
+        py += brick.height;
     });
 }
 
