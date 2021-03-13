@@ -116,6 +116,7 @@ function createTreasure() {
 //     }
 // }
 
+//bricks
 bricks = new PIXI.Sprite.from("img/Brick.png");
 
 
