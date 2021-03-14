@@ -114,7 +114,9 @@ function loadBricks() {
 }
 
 function bounceBricks() {
+    bricks.forEach(function(brick) {
 
+    })
 }
 // let keysDiv = document.querySelector("#canvas");
 // let keys = {};
