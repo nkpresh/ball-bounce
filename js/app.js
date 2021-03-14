@@ -113,7 +113,9 @@ function loadBricks() {
     });
 }
 
+function bounceBricks() {
 
+}
 // let keysDiv = document.querySelector("#canvas");
 // let keys = {};
 
