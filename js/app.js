@@ -331,6 +331,7 @@ function bounceBricks() {
             collisionPoint = collisionPoint / (brick.width / 2);
             angle = collisionPoint * Math.PI / 3;
             vx = Math.floor(Math.cos(angle) * -speed);
+
             vy = Math.floor(Math.sin(angle) * speed);
         }
         if (ball.y + (ball.height / 2) > brick.y &&
