@@ -116,7 +116,9 @@ function loadBricks() {
 function bounceBricks() {
     bricks.forEach(function(brick) {
         if (ball.y - (ball.height / 2) >= (brick.y + 15) &&
-            brick.y + (brick.height / 2) >= ball.y - (ball.height / 2) && (ball.x + ball.width / 2)
+            brick.y + (brick.height / 2) >= ball.y - (ball.height / 2) &&
+            ball.x <= (brick.x + brick.width / 2) &&
+            ball.x >= brick.x - (brick.width / 2)
         ) {
             vy = -vy;
         }
@@ -286,7 +288,7 @@ function movePlayer(e) {
 function moveBall() {
     ball.x += vx;
     ball.y += vy;
-
+    bounceBricks();
     if (ball.x + ballRadius >= app.view.width - 5 || ball.x - ballRadius <= 5) {
         vx = -vx;
     }
