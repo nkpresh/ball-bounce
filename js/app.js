@@ -103,7 +103,7 @@ bricks = [
 function loadBricks() {
     let py = 0;
     bricks.forEach(brick => {
-        brick.height = 25;
+        brick.height = 20;
         brick.width = 150;
         brick.x = app.view.width / 2;
         brick.y = (app.view.width / 2) + py;
@@ -115,12 +115,16 @@ function loadBricks() {
 
 function bounceBricks() {
     bricks.forEach(function(brick) {
-        if (ball.y - (ball.height / 2) >= (brick.y + 15) &&
+        if (ball.y - (ball.height / 2) >= brick.y &&
+            brick.y + (brick.height / 2) >= ball.y - (ball.height / 2) &&
+            ball.x <= (brick.x + brick.width / 2) &&
+            ball.x >= brick.x - (brick.width / 2) ||
+            ball.y - (ball.height / 2) >= brick.y &&
             brick.y + (brick.height / 2) >= ball.y - (ball.height / 2) &&
             ball.x <= (brick.x + brick.width / 2) &&
             ball.x >= brick.x - (brick.width / 2)
         ) {
-            vy = -vy;
+            changeDirection();
         }
     })
 }
@@ -300,6 +304,7 @@ function moveBall() {
         }
     }
     if (hitPlayer(ball, player)) {
+        point += 10;
         changeDirection();
     }
 
@@ -319,7 +324,6 @@ function hitPlayer(bll, ply) {
 }
 
 function changeDirection() {
-    point += 10;
     let collisionPoint = ball.x - (player.x + player.width / 2);
     collisionPoint = collisionPoint / (player.width / 2);
     angle = collisionPoint * Math.PI / 3;
