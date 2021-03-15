@@ -124,28 +124,6 @@ function bounceBricks() {
         }
     })
 }
-// let keysDiv = document.querySelector("#canvas");
-// let keys = {};
-
-// function loopGame(e) {
-//     keysDiv.innerHTML = JSON.stringify(keys);
-//     //W
-//     if (keys[87]) {
-//         if (!treasureBox.playing) {
-//             treasureBox.textures = treasure.openTreasure;
-//             treasureBox.play()
-//         }
-//         treasureBox.y -= speed;
-//     }
-//     //A
-//     if (keys[65]) {
-//         if (!treasureBox.playing) {
-//             treasureBox.textures = treasure.lockTreasure;
-//             treasureBox.play()
-//         }
-//         treasureBox.x -= speed;
-//     }
-// }
 
 
 //button
