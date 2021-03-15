@@ -322,9 +322,10 @@ function changeDirection() {
 
 function bounceBricks() {
     bricks.forEach(function(brick) {
-        if (bll.x + bll.width / 2 > ply.x - (player.width / 2) &&
-            ply.x + (ply.width / 2) > ball.x &&
-            bll.y + bll.height > ply.y && ply.y + (ply.height / 2) > ball.x
+        if (ball.y - (ball.height / 2) >= brick.y + (brick.height / 1.5) &&
+            brick.y + brick.height > ball.y - (ball.height / 2) &&
+            ball.x + (ball.width / 2) >= brick.x &&
+            ball.x - (ball.width / 2) <= brick.x + brick.width
         ) {
 
         }
