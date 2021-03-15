@@ -116,11 +116,7 @@ function loadBricks() {
 function bounceBricks() {
     bricks.forEach(function(brick) {
         if (ball.y - (ball.height / 2) >= brick.y &&
-            brick.y + (brick.height / 2) >= ball.y - (ball.height / 2) &&
-            ball.x <= (brick.x + brick.width / 2) &&
-            ball.x >= brick.x - (brick.width / 2) ||
-            ball.y - (ball.height / 2) >= brick.y &&
-            brick.y + (brick.height / 2) >= ball.y - (ball.height / 2) &&
+            brick.y + brick.height >= ball.y - (ball.height / 2) &&
             ball.x <= (brick.x + brick.width / 2) &&
             ball.x >= brick.x - (brick.width / 2)
         ) {
