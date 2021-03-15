@@ -113,23 +113,7 @@ function loadBricks() {
     });
 }
 
-function bounceBricks() {
-    bricks.forEach(function(brick) {
-        if (ball.y - (ball.height / 2) >= brick.y + (brick.height / 2) &&
-            brick.y + brick.height > ball.y - (ball.height / 2) &&
-            ball.x >= brick.x &&
-            ball.x <= brick.x + brick.width
-        ) {
-            changeDirection();
-        }
-        if (ball.y + (ball.height / 2) >= brick.y &&
-            brick.y + (brick.height / 2) > ball.x + (ball.height / 2) &&
-            ball.x >= brick.x &&
-            ball.x <= brick.x + brick.width) {
-            changeDirection();
-        }
-    })
-}
+
 
 
 //button
@@ -330,10 +314,28 @@ function changeDirection() {
     collisionPoint = collisionPoint / (player.width / 2);
     angle = collisionPoint * Math.PI / 3;
 
-    vx = Math.cos(angle) * speed;
-    vy = Math.sin(angle) * speed;
+    vx = Math.floor(Math.cos(angle) * speed);
+    vy = Math.floor(Math.sin(angle) * speed);
     document.querySelector("#life").innerHTML = life;
 
+}
+
+function bounceBricks() {
+    bricks.forEach(function(brick) {
+        if (ball.y - (ball.height / 2) >= brick.y + (brick.height / 1.5) &&
+            brick.y + brick.height > ball.y - (ball.height / 2) &&
+            ball.x + (ball.width / 2) >= brick.x &&
+            ball.x - (ball.width / 2) <= brick.x + brick.width
+        ) {
+            changeDirection();
+        }
+        // if (ball.y + (ball.height / 2) >= brick.y &&
+        //     brick.y + (brick.height / 2) > ball.x + (ball.height / 2) &&
+        //     ball.x >= brick.x &&
+        //     ball.x <= brick.x + brick.width) {
+        //     changeDirection();
+        // }
+    })
 }
 
 function hitTreasure() {
