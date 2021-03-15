@@ -115,7 +115,9 @@ function loadBricks() {
 
 function bounceBricks() {
     bricks.forEach(function(brick) {
-
+if(ball.y-(ball.height/2)>=(brick.y+15)&&brick.y+(brick.height/2) >= ball.y-(ball.height/2)){
+    vy=-vy;
+}
     })
 }
 // let keysDiv = document.querySelector("#canvas");
@@ -278,11 +280,6 @@ function movePlayer(e) {
     let pos = e.data.global;
     player.x = pos.x;
 }
-
-function bounceOnBricks() {
-
-}
-
 function moveBall() {
     ball.x += vx;
     ball.y += vy;
