@@ -320,7 +320,18 @@ function hitPlayer(bll, ply) {
 
 function changeDirection() {
     point += 10;
-    if (point == 100) {
+    let collisionPoint = ball.x - (player.x + player.width / 2);
+    collisionPoint = collisionPoint / (player.width / 2);
+    angle = collisionPoint * Math.PI / 3;
+
+    vx = Math.cos(angle) * speed;
+    vy = Math.sin(angle) * speed;
+    document.querySelector("#life").innerHTML = life;
+
+}
+
+function hitTreasure() {
+    if (true) {
         clearInterval(gameLoop);
         app.stage.removeChild(player);
         app.stage.removeChild(ball);
@@ -343,16 +354,6 @@ function changeDirection() {
 
 
         winPage.visible = true;
-        point = 0;
-        life = 3;
-    } else {
-        let collisionPoint = ball.x - (player.x + player.width / 2);
-        collisionPoint = collisionPoint / (player.width / 2);
-        angle = collisionPoint * Math.PI / 3;
 
-        vx = Math.cos(angle) * speed;
-        vy = Math.sin(angle) * speed;
     }
-    document.querySelector("#life").innerHTML = life;
-
 }
