@@ -48,6 +48,8 @@ backGroundImage.addChild(image);
 ball = new PIXI.Sprite.from("img/ball.png");
 ball.width = 30;
 ball.height = 30;
+ball.x = app.view.width / 2;
+ball.y = app.view.width / 2;
 ball.anchor.set(0.5);
 let ballRadius = ball.width / 2;
 
@@ -103,9 +105,9 @@ bricks = [
 function loadBricks() {
     let py = 0;
     bricks.forEach(brick => {
-        brick.height = 20;
+        brick.height = 30;
         brick.width = 150;
-        brick.x = app.view.width / 2;
+        brick.x = app.view.width - brick.width;
         brick.y = (app.view.width / 2) + py;
         py += brick.height;
 
@@ -236,8 +238,6 @@ function startGame() {
     LosePage.removeChild(text1);
     winPage.visible = false;
     LosePage.visible = false;
-    ball.x = app.view.width / 2;
-    ball.y = app.view.width / 2;
     app.stage.addChild(player);
     app.stage.addChild(ball);
     life = 3;
