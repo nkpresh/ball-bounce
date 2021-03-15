@@ -327,14 +327,19 @@ function bounceBricks() {
             ball.x + (ball.width / 2) >= brick.x &&
             ball.x - (ball.width / 2) <= brick.x + brick.width
         ) {
+            let collisionPoint = ball.x - (brick.x + brick.width / 2);
+            collisionPoint = collisionPoint / (brick.width / 2);
+            angle = collisionPoint * Math.PI / 3;
 
+            vx = Math.floor(Math.cos(angle) * speed);
+            vy = Math.floor(Math.sin(angle) * speed);
         }
-        // if (ball.y + (ball.height / 2) >= brick.y &&
-        //     brick.y + (brick.height / 2) > ball.x + (ball.height / 2) &&
-        //     ball.x >= brick.x &&
-        //     ball.x <= brick.x + brick.width) {
-        //     changeDirection();
-        // }
+        if (ball.y + (ball.height / 2) >= brick.y &&
+            brick.y + (brick.height / 2) > ball.x + (ball.height / 2) &&
+            ball.x >= brick.x &&
+            ball.x <= brick.x + brick.width) {
+            changeDirection();
+        }
     })
 }
 
