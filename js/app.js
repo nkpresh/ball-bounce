@@ -65,9 +65,11 @@ app.loader.baseUrl = "img"
 app.loader.add("treasureBox", "treasureBox.png");
 
 function CreateHeart() {
-    heart["LifeLine"] = [
+    heart = [
+        new PIXI.Sprite.from("img/heart.png"),
+        new PIXI.Sprite.from("img/heart.png"),
         new PIXI.Sprite.from("img/heart.png")
-    ]
+    ];
 }
 
 function doneLoading(e) {
