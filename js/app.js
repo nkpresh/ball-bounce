@@ -268,7 +268,11 @@ function moveBall() {
             clearInterval(gameLoop);
             app.stage.removeChild(ball);
             app.stage.removeChild(player);
-            app.stage.removeChild(treasure);
+            treasure.forEach(treasuretype => {
+                treasure.splice(treasuretype);
+                app.stage.removeChild(treasuretype);
+
+            })
             text1 = new PIXI.Text(`Game Over: ${point}`);
             text1.anchor.set(0.5);
             text1.x = app.view.width / 2;
@@ -360,6 +364,9 @@ function hitTreasure() {
         app.stage.removeChild(player);
         app.stage.removeChild(ball);
         app.stage.removeChild(treasure);
+        bricks.forEach(brick => {
+            app.stage.removeChild(brick);
+        });
 
         let winText = new PIXI.Text(`You Win ! ! ! Score :  ${point}`);
         winText.anchor.set(0.5);
