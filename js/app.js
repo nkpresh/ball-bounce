@@ -4,7 +4,7 @@ let player;
 var vx, vy;
 let firstPage;
 let winPage;
-let speed = 30;
+let speed = 7;
 let LosePage;
 let canvas = document.querySelector("#canvas");
 let button;
@@ -68,7 +68,6 @@ app.loader.add("treasureBox", "treasureBox.png");
 function doneLoading(e) {
     createTreasureSheet();
     createTreasure();
-    // app.ticker.add(loopGame);
 }
 
 function createTreasureSheet() {
@@ -229,7 +228,7 @@ onload = function(e) {
     winPage.visible = false;
 }
 
-vx = 10;
+vx = Math.random() * 15 - 10;
 vy = -10;
 
 function startGame() {
@@ -243,7 +242,7 @@ function startGame() {
     life = 3;
     firstPage.visible = false;
     document.querySelector("#life").innerHTML = life;
-    gameLoop = setInterval(moveBall, 1000 / speed);
+    gameLoop = setInterval(moveBall, 1000 / 80);
     app.loader.load(doneLoading);
 
 }
@@ -341,7 +340,9 @@ function bounceBricks() {
         }
         if (ball.x < brick.x &&
             ball.x + ballRadius >= brick.x &&
-            ball.x + ballRadius < brick.x + (brick.width / 10)
+            ball.x + ballRadius < brick.x + (brick.width / 10) &&
+            ball.y >= brick.y && ball.y < brick.y + brick.height
+
         ) {
             vx = -vx;
         }
