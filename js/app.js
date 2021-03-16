@@ -322,8 +322,9 @@ function changeDirection() {
 
 function bounceBricks() {
     bricks.forEach(function(brick) {
-        // dy = Math.sqrt(Math.pow(brick.y + ball.y, 2));
-        if (ball.y + ballRadius) {
+        //dstance btwn ball.y and brick.y
+        disty = ball.y + (brick.y - ball.y);
+        if (ball.y + ballRadius >= disty) {
             changeDirection()
         }
     })
