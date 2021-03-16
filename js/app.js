@@ -341,7 +341,8 @@ function bounceBricks() {
         }
         if (ball.x < brick.x &&
             ball.x + ballRadius >= brick.x &&
-            ball.x + ballRadius < brick.x + (brick.width / 10)) {
+            ball.x + ballRadius < brick.x + (brick.width / 10)
+        ) {
             vx = -vx;
         }
     })
