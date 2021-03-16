@@ -17,8 +17,7 @@ let backGroundImage;
 let winQuitButton;
 let loseQuitButton;
 let treasure = [];
-let TreasureBox;
-//unstaged
+let treasureBox;
 let bricks = [];
 
 //initialize pages
@@ -268,11 +267,7 @@ function moveBall() {
             clearInterval(gameLoop);
             app.stage.removeChild(ball);
             app.stage.removeChild(player);
-            treasure.forEach(treasuretype => {
-                treasure.splice(treasuretype);
-                app.stage.removeChild(treasuretype);
-
-            })
+            app.stage.removeChild(treasureBox);
             text1 = new PIXI.Text(`Game Over: ${point}`);
             text1.anchor.set(0.5);
             text1.x = app.view.width / 2;
