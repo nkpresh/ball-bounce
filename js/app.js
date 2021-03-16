@@ -18,6 +18,7 @@ let winQuitButton;
 let loseQuitButton;
 let treasure;
 let bricks = [];
+let heart = [];
 
 //initialize pages
 firstPage = new PIXI.Container();
@@ -63,6 +64,11 @@ player.y = app.view.height - 10;
 app.loader.baseUrl = "img"
 app.loader.add("treasureBox", "treasureBox.png");
 
+function CreateHeart() {
+    heart["LifeLine"] = [
+        new PIXI.Sprite.from("img/heart.png")
+    ]
+}
 
 function doneLoading(e) {
     createTreasure();
