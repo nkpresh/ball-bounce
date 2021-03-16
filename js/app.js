@@ -114,9 +114,6 @@ function loadBricks() {
     });
 }
 
-
-
-
 //button
 button = new PIXI.Sprite.from("img/playButton.png");
 button.height = 60;
