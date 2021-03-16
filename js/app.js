@@ -70,10 +70,20 @@ function CreateHeart() {
         new PIXI.Sprite.from("img/heart.png"),
         new PIXI.Sprite.from("img/heart.png")
     ];
+    let i = 10;
+    heart.forEach(lifeLine => {
+        lifeLine.height = 30;
+        lifeLine.width = 30;
+        lifeLine.anchor.set(0.5);
+        lifeLine.y = 15;
+        lifeLine.x = i;
+        i++;
+    })
 }
 
 function doneLoading(e) {
     createTreasure();
+    CreateHeart();
 }
 
 function createTreasure() {
