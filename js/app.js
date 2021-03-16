@@ -63,6 +63,7 @@ player.y = app.view.height - 10;
 app.loader.baseUrl = "img"
 app.loader.add("treasureBox", "treasureBox.png");
 
+
 function doneLoading(e) {
     createTreasure();
 }
@@ -77,7 +78,6 @@ function createTreasure() {
     treasure.y = Math.random() * app.view.height / 3;
     app.stage.addChild(treasure);
 }
-
 
 //bricks
 bricks = [
