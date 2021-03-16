@@ -324,7 +324,7 @@ function bounceBricks() {
     bricks.forEach(function(brick) {
         //dstance btwn ball.y and brick.y
         disty = ball.y + (brick.y - ball.y);
-        if (ball.y + ballRadius >= disty) {
+        if (ball.y + ballRadius >= disty && ball.y + ballRadius < brick.y + (brick.height / 3) && ball.x + ballRadius >= brick.x && ball.x - ballRadius < brick.x + brick.width) {
             changeDirection()
         }
     })
