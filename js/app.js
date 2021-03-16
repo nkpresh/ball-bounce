@@ -16,8 +16,7 @@ let backGroundImage;
 //not functional
 let winQuitButton;
 let loseQuitButton;
-let treasure = [];
-let treasureBox;
+let treasure;
 let bricks = [];
 
 //initialize pages
@@ -65,33 +64,20 @@ app.loader.baseUrl = "img"
 app.loader.add("treasureBox", "treasureBox.png");
 
 function doneLoading(e) {
-    createTreasureSheet();
     createTreasure();
 }
 
-function createTreasureSheet() {
-    let sSheet = new PIXI.BaseTexture.from(app.loader.resources["treasureBox"].url);
-    let w = 50;
-    let h = 35;
-
-    treasure["lockTreasure"] = [
-        new PIXI.Texture(sSheet, new PIXI.Rectangle(0, 0, w, h))
-    ];
-    treasure["openTreasure"] = [
-        new PIXI.Texture(sSheet, new PIXI.Rectangle(1 * w, 0, w, h))
-    ];
-}
-
 function createTreasure() {
-    treasureBox = new PIXI.AnimatedSprite(treasure.openTreasure);
-    treasureBox.anchor.set(0.5);
-    treasureBox.loop = false;
-    treasureBox.x = Math.random() * app.view.width;
-    treasureBox.y = Math.random() * app.view.height / 3;
-    app.stage.addChild(treasureBox);
-    treasureBox.play();
 
+    treasure = new PIXI.Sprite.from("img/treasure.png")
+    treasure.anchor.set(0.5);
+    treasure.height = 30;
+    treasure.width = 30;
+    treasure.x = Math.random() * app.view.width;
+    treasure.y = Math.random() * app.view.height / 3;
+    app.stage.addChild(treasure);
 }
+
 
 //bricks
 bricks = [
@@ -267,7 +253,9 @@ function moveBall() {
             clearInterval(gameLoop);
             app.stage.removeChild(ball);
             app.stage.removeChild(player);
-            app.stage.removeChild(treasureBox);
+            app.stage.removeChild(treasure);
+            app.stage.removeChild(treasure);
+            bricks.forEach(brick => { app.stage.removeChild(brick) });
             text1 = new PIXI.Text(`Game Over: ${point}`);
             text1.anchor.set(0.5);
             text1.x = app.view.width / 2;
