@@ -327,6 +327,7 @@ function bounceBricks() {
         if (ball.y + ballRadius >= disty && ball.y + ballRadius < brick.y + (brick.height / 3) && ball.x + ballRadius >= brick.x && ball.x - ballRadius < brick.x + brick.width) {
             changeDirection()
         }
+
     })
 }
 
