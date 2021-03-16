@@ -373,3 +373,7 @@ function hitTreasure() {
 
     }
 }
+
+function newDirectionAfterBrick() {
+
+}
