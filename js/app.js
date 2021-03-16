@@ -327,13 +327,13 @@ function bounceBricks() {
             ball.y + ballRadius < brick.y + (brick.height / 3) &&
             ball.x + ballRadius >= brick.x &&
             ball.x - ballRadius < brick.x + brick.width) {
-            clearInterval(gameLoop);
+            vy = -vy
         }
         if (ball.y - ballRadius <= brick.y + brick.height &&
             ball.y - ballRadius >= brick.y + (brick.height - (brick.height / 3)) &&
             ball.x + ballRadius >= brick.x &&
             ball.x - ballRadius < brick.x + brick.width) {
-            clearInterval(gameLoop);
+            vy = -vy
         }
         if (ball.x < brick.x &&
             ball.x + ballRadius >= brick.x &&
