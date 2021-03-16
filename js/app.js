@@ -325,12 +325,19 @@ function bounceBricks() {
         //dstance btwn ball.y and brick.y
         let distyfromTop = ball.y + (brick.y - ball.y);
         //dstance btwn ball.y and brick.y
-        let distyfromButtom = ball.y - brick.y;
-        if (ball.y + ballRadius >= distyfromTop && ball.y + ballRadius < brick.y + (brick.height / 3) && ball.x + ballRadius >= brick.x && ball.x - ballRadius < brick.x + brick.width) {
-            changeDirection()
-        }
-        if (ball - ballRadius <= brick.y + brick.height) {
+        let distyfromButtom = brick.y + (ball.y - brick.y);
 
+        if (ball.y + ballRadius >= distyfromTop &&
+            ball.y + ballRadius < brick.y + (brick.height / 2) &&
+            ball.x + ballRadius >= brick.x &&
+            ball.x - ballRadius < brick.x + brick.width) {
+            clearInterval(gameLoop);
+        }
+        if (ball.y - ballRadius <= brick.y + brick.height &&
+            ball.y - ballRadius >= brick.y + (brick.height - (brick.height / 2)) &&
+            ball.x + ballRadius >= brick.x &&
+            ball.x - ballRadius < brick.x + brick.width) {
+            clearInterval(gameLoop);
         }
     })
 }
