@@ -64,20 +64,23 @@ player.y = app.view.height - 10;
 app.loader.baseUrl = "img"
 app.loader.add("treasureBox", "treasureBox.png");
 
+//heart
+heart = [
+    new PIXI.Sprite.from("img/heart.png"),
+    new PIXI.Sprite.from("img/heart.png"),
+    new PIXI.Sprite.from("img/heart.png")
+];
+
 function CreateHeart() {
-    heart = [
-        new PIXI.Sprite.from("img/heart.png"),
-        new PIXI.Sprite.from("img/heart.png"),
-        new PIXI.Sprite.from("img/heart.png")
-    ];
-    let i = 10;
+    let i = 20;
     heart.forEach(lifeLine => {
         lifeLine.height = 30;
         lifeLine.width = 30;
         lifeLine.anchor.set(0.5);
-        lifeLine.y = 15;
+        lifeLine.y = 20;
         lifeLine.x = i;
-        i++;
+        app.stage.addChild(lifeLine);
+        i += 40;
     })
 }
 
@@ -100,8 +103,8 @@ function createTreasure() {
 //bricks
 bricks = [
     new PIXI.Sprite.from("img/Brick.png"),
-    // new PIXI.Sprite.from("img/Brick.png"),
-    // new PIXI.Sprite.from("img/Brick.png"),
+    new PIXI.Sprite.from("img/Brick.png"),
+    new PIXI.Sprite.from("img/Brick.png"),
 ];
 
 function loadBricks() {
@@ -272,7 +275,10 @@ function moveBall() {
             app.stage.removeChild(ball);
             app.stage.removeChild(player);
             app.stage.removeChild(treasure);
-            app.stage.removeChild(treasure);
+            heart.forEach(lifeLine => {
+                app.stage.removeChild(lifeLine);
+
+            })
             bricks.forEach(brick => { app.stage.removeChild(brick) });
             text1 = new PIXI.Text(`Game Over: ${point}`);
             text1.anchor.set(0.5);
