@@ -51,7 +51,7 @@ ball.height = 30;
 ball.x = app.view.width / 2;
 ball.y = app.view.width / 2;
 ball.anchor.set(0.5);
-let ballRadius = ball.width / 2;
+let ballRadius = ball.height / 2;
 
 //create player
 player = new PIXI.Sprite.from("img/paddle.png");
@@ -322,8 +322,8 @@ function changeDirection() {
 
 function bounceBricks() {
     bricks.forEach(function(brick) {
-        dy = Math.sqrt(Math.pow(brick.y + ball.y, 2));
-        if (dy >= (brick.y + (brick.height / 2)) + (ball.y + (ball.height / 2)) && ball.x + (ball.width / 2)) {
+        // dy = Math.sqrt(Math.pow(brick.y + ball.y, 2));
+        if (ball.y + ballRadius) {
             changeDirection()
         }
     })
