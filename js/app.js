@@ -60,10 +60,6 @@ player.anchor.set(0.5);
 player.x = app.view.width / 2;
 player.y = app.view.height - 10;
 
-//treasure box
-app.loader.baseUrl = "img"
-app.loader.add("treasureBox", "treasureBox.png");
-
 //heart
 heart = [
     new PIXI.Sprite.from("img/heart.png"),
@@ -255,6 +251,8 @@ function movePlayer(e) {
     player.x = pos.x;
 }
 
+let i = 3;
+
 function moveBall() {
     ball.x += vx;
     ball.y += vy;
@@ -268,9 +266,9 @@ function moveBall() {
     }
 
     if (ball.y + (ball.width / 2) >= app.view.height) {
-        life--;
-        point = point;
-        if (life == 0) {
+        app.stage.removeChild(heart[i]);
+        i--;
+        if (i == 0) {
             clearInterval(gameLoop);
             app.stage.removeChild(ball);
             app.stage.removeChild(player);
